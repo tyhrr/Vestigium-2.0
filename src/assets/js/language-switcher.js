@@ -51,13 +51,13 @@ const TRANSLATIONS = {
       title: 'Vestigium - Ecological-Creative Association for Sustainable Communities',
       description: 'Vestigium is an association in Zagreb that improves community quality of life by promoting healthy and sustainable lifestyle through educational and ecological activities.'
     },
-    
-    // Navigation
+      // Navigation
     nav: {
       'community-center': 'Community Center',
       'who-are-we': 'Who are we?',
       'what-we-have-done': 'What we have done',
       'join-us': 'Join us / Become a member',
+      news: 'News',
       calendar: 'Calendar',
       'zadruga-zelenica': 'Zadruga Zelenica',
       'find-us': 'Find us',
@@ -125,10 +125,12 @@ const TRANSLATIONS = {
       title: 'Vestigium',
       description: 'Ecological-creative association improving community quality of life through sustainable initiatives and education in Zagreb.',
       achievement1: '🏆 Changemakers Croatia 2017',
-      achievement2: '🌟 Social Marie Award Finalist 2018',
-      links: 'Links',      home: 'Home',
+      achievement2: '🌟 Social Marie Award Finalist 2018',      links: 'Links',
+      home: 'Home',
       activities: 'Activities',
       about: 'About us',
+      news: 'News',
+      contact: 'Contact',
       'get-involved': 'Get involved',
       involvement: {
         title: 'Get Involved',
@@ -150,26 +152,57 @@ const TRANSLATIONS = {
       copyright: '&copy; 2025 Vestigium Association. All rights reserved.',
       tech: 'Building sustainable communities since 2011 • Over 1000 annual activities'
     },
-    
-    // Language Switcher
+      // Language Switcher
     lang: {
       current: 'Current language',
       select: 'Select language'
+    },
+    
+    // News Page
+    news: {
+      meta: {
+        title: 'News - Vestigium Ecological-Creative Association',
+        description: 'Stay updated with the latest news and activities from Vestigium ecological-creative association in Zagreb.'
+      },
+      hero: {
+        title: 'Latest News',
+        subtitle: 'Stay updated with our latest activities, events, and community initiatives'
+      },
+      facebook: {
+        title: 'From our Facebook',
+        subtitle: 'Connect with our community through our latest social media updates',
+        loading: 'Loading latest posts...',
+        'view-post': 'View on Facebook',
+        'error-title': 'Unable to load Facebook posts',
+        'error-text': 'Please check your internet connection or try again later.',
+        'error-help': 'Please check the configuration and try again.'
+      },
+      gallery: {
+        title: 'Recent Activities',
+        subtitle: 'Browse through our recent community activities and events',
+        loading: 'Loading gallery...'
+      },
+      cta: {
+        title: 'Stay Connected',
+        text: 'Follow us on social media to stay updated with our latest activities and join our community events',
+        facebook: 'Follow on Facebook',
+        join: 'Join Us'
+      }
     }
-  },  
+  },
   hr: {
     // Meta tags
     meta: {
       title: 'Vestigium - Ekolosko-Kreativna Udruga za Održive Zajednice',
       description: 'Vestigium je udruga u Zagrebu koja poboljšava kvalitetu života zajednice promovira zdrav i održiv način života kroz edukacijske i ekološke aktivnosti.'
     },
-    
-    // Navigation
+      // Navigation
     nav: {
       'community-center': 'Društveni Centar',
       'who-are-we': 'Tko smo mi?',
       'what-we-have-done': 'Što smo napravili',
       'join-us': 'Pridružite nam se / Postanite član',
+      news: 'Vijesti',
       calendar: 'Kalendar',
       'zadruga-zelenica': 'Zadruga Zelenica',
       'find-us': 'Pronađite nas',
@@ -237,10 +270,12 @@ const TRANSLATIONS = {
       title: 'Vestigium',
       description: 'Ekolosko-kreativna udruga koja poboljšava kvalitetu života zajednice kroz održive inicijative i edukaciju u Zagrebu.',
       achievement1: '🏆 Changemakers Hrvatska 2017',
-      achievement2: '🌟 Social Marie Award Finalist 2018',
-      links: 'Linkovi',      home: 'Početna',
+      achievement2: '🌟 Social Marie Award Finalist 2018',      links: 'Linkovi',
+      home: 'Početna',
       activities: 'Aktivnosti',
       about: 'O nama',
+      news: 'Vijesti',
+      contact: 'Kontakt',
       'get-involved': 'Uključite se',
       involvement: {
         title: 'Uključite Se',
@@ -262,11 +297,42 @@ const TRANSLATIONS = {
       copyright: '&copy; 2025 Udruga Vestigium. Sva prava pridržana.',
       tech: 'Izgradnja održivih zajednica od 2011. • Preko 1000 godišnjih aktivnosti'
     },
-    
-    // Language Switcher
+      // Language Switcher
     lang: {
       current: 'Trenutni jezik',
       select: 'Odaberite jezik'
+    },
+    
+    // News Page
+    news: {
+      meta: {
+        title: 'Vijesti - Vestigium Ekolosko-Kreativna Udruga',
+        description: 'Budite u tijeku s najnovijim vijestima i aktivnostima Vestigium ekolosko-kreativne udruge u Zagrebu.'
+      },
+      hero: {
+        title: 'Najnovije Vijesti',
+        subtitle: 'Budite u tijeku s našim najnovijim aktivnostima, događajima i inicijativama zajednice'
+      },
+      facebook: {
+        title: 'S našeg Facebooka',
+        subtitle: 'Povežite se s našom zajednicom kroz naše najnovije objave na društvenim mrežama',
+        loading: 'Učitavanje najnovijih objava...',
+        'view-post': 'Pogledaj na Facebooku',
+        'error-title': 'Nije moguće učitati Facebook objave',
+        'error-text': 'Molimo provjerite internetsku vezu ili pokušajte kasnije.',
+        'error-help': 'Molimo provjerite konfiguraciju i pokušajte ponovno.'
+      },
+      gallery: {
+        title: 'Nedavne Aktivnosti',
+        subtitle: 'Pregledajte naše nedavne aktivnosti i događaje zajednice',
+        loading: 'Učitavanje galerije...'
+      },
+      cta: {
+        title: 'Ostanite Povezani',
+        text: 'Pratite nas na društvenim mrežama kako biste ostali u tijeku s našim najnovijim aktivnostima i pridružili se događajima zajednice',
+        facebook: 'Pratite na Facebooku',
+        join: 'Pridružite Nam Se'
+      }
     }
   }
 };

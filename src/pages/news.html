@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="news.meta.title">News - Vestigium Ecological-Creative Association</title>
+    <meta name="description" content="Stay updated with the latest news and activities from Vestigium ecological-creative association in Zagreb." data-i18n-attr="content:news.meta.description">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://vestigium.hr/news">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="News - Vestigium Association" data-i18n-attr="content:news.meta.title">
+    <meta property="og:description" content="Latest news and activities from Vestigium ecological-creative association" data-i18n-attr="content:news.meta.description">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vestigium.hr/news">
+    <meta property="og:image" content="../assets/images/content/vestigium-news.jpg">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="News - Vestigium" data-i18n-attr="content:news.meta.title">
+    <meta name="twitter:description" content="Latest news from Vestigium ecological association" data-i18n-attr="content:news.meta.description">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/favicon/favicon-96x96.png">
+    <link rel="icon" href="../assets/images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon/apple-touch-icon.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="#2E7D32">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="../assets/css/main.css" as="style">
+    <link rel="preload" href="../assets/js/main.js" as="script">
+    
+    <!-- Swiper CSS for carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/navigation-advanced.css">
+    
+    <style>
+        /* =============================================================================
+           NEWS PAGE SPECIFIC STYLES
+           ============================================================================= */
+        
+        .news-hero {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+            color: var(--white);
+            padding: var(--space-4xl) 0 var(--space-3xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .news-hero__container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .news-hero__title {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+        
+        .news-hero__icon {
+            width: 48px;
+            height: 48px;
+            fill: currentColor;
+        }
+        
+        .news-hero__subtitle {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: var(--line-height-relaxed);
+        }
+        
+        /* =============================================================================
+           FACEBOOK FEED STYLES
+           ============================================================================= */
+        
+        .facebook-feed {
+            padding: var(--space-4xl) 0;
+            background-color: var(--white);
+        }
+        
+        .facebook-feed__container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+        
+        .facebook-feed__header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+        
+        .facebook-feed__title {
+            color: var(--primary-green);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+        
+        .facebook-feed__title svg {
+            width: 32px;
+            height: 32px;
+            fill: #1877F2;
+        }
+        
+        .facebook-feed__subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* =============================================================================
+           CAROUSEL STYLES
+           ============================================================================= */
+        
+        .facebook-carousel {
+            margin-bottom: var(--space-4xl);
+            position: relative;
+        }
+        
+        .facebook-carousel__wrapper {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .facebook-post {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-normal);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .facebook-post:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .facebook-post__image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .facebook-post__content {
+            padding: var(--space-lg);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .facebook-post__date {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .facebook-post__text {
+            color: var(--text-primary);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--space-md);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+        
+        .facebook-post__link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--primary-green);
+            font-weight: var(--font-weight-medium);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            transition: color var(--transition-fast);
+            margin-top: auto;
+        }
+        
+        .facebook-post__link:hover {
+            color: var(--dark-green);
+        }
+        
+        .facebook-post__link svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Swiper Navigation */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary-green);
+            background: var(--white);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+        }
+        
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+        
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .swiper-pagination-bullet {
+            background: var(--medium-gray);
+            opacity: 0.5;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--primary-green);
+            opacity: 1;
+        }
+        
+        /* =============================================================================
+           GALLERY STYLES
+           ============================================================================= */
+        
+        .facebook-gallery {
+            margin-top: var(--space-3xl);
+            padding: var(--space-3xl) 0;
+            background-color: var(--light-gray);
+        }
+        
+        .facebook-gallery__header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .facebook-gallery__title {
+            color: var(--primary-green);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .facebook-gallery__subtitle {
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+        }
+        
+        .facebook-gallery__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .facebook-gallery__item {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition-normal);
+            aspect-ratio: 1;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .facebook-gallery__item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .facebook-gallery__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .facebook-gallery__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(46, 125, 50, 0.8), rgba(76, 175, 80, 0.6));
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: var(--font-weight-medium);
+            text-align: center;
+            padding: var(--space-sm);
+        }
+        
+        .facebook-gallery__item:hover .facebook-gallery__overlay {
+            opacity: 1;
+        }
+        
+        /* =============================================================================
+           LOADING STATES
+           ============================================================================= */
+        
+        .facebook-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4xl);
+            color: var(--text-secondary);
+        }
+        
+        .facebook-loading__spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--light-gray);
+            border-top: 3px solid var(--primary-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: var(--space-md);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .facebook-error {
+            text-align: center;
+            padding: var(--space-3xl);
+            color: var(--text-secondary);
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            margin: var(--space-lg) 0;
+        }
+        
+        .facebook-error__icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--space-md);
+            opacity: 0.5;
+        }
+        
+        /* =============================================================================
+           RESPONSIVE DESIGN
+           ============================================================================= */
+        
+        @media (min-width: 640px) {
+            .facebook-gallery__grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .facebook-post__image {
+                height: 250px;
+            }
+            
+            .news-hero__title {
+                font-size: var(--font-size-5xl);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .facebook-carousel .swiper-slide {
+                width: auto;
+            }
+            
+            .facebook-post__image {
+                height: 280px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .facebook-post__image {
+                height: 320px;
+            }
+            
+            .facebook-post__content {
+                padding: var(--space-xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link" data-i18n="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header role="banner" class="header">
+        <div class="header__container">
+            <div class="header__brand" itemscope itemtype="https://schema.org/Organization">
+                <h1 class="header__logo" itemprop="name">
+                    <a href="../../index.html" aria-label="Vestigium - Ecological-Creative Association - Home">Vestigium</a>
+                    <img src="../assets/images/logo/logo-png.png" alt="Vestigium logo">
+                </h1>
+            </div>
+            
+            <!-- Language Selector - will be inserted here by JavaScript -->
+            
+            <!-- Navigation -->
+            <nav role="navigation" class="navigation" aria-label="Main navigation">
+                <button class="navigation__toggle" aria-label="Open navigation menu" aria-expanded="false">
+                    <span class="navigation__hamburger"></span>
+                </button>
+                
+                <ul class="navigation__menu" role="menubar">
+                    <!-- Community Center with Dropdown -->
+                    <li class="navigation__item" role="none">                        <a href="#community-center" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.community-center">Community Center</a>
+                        <ul class="navigation__submenu" role="menu">
+                            <li class="navigation__item" role="none">
+                                <a href="#who-are-we" class="navigation__link" role="menuitem" data-i18n="nav.who-are-we">Who are we?</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#what-we-have-done" class="navigation__link" role="menuitem" data-i18n="nav.what-we-have-done">What we have done</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#join-us" class="navigation__link" role="menuitem" data-i18n="nav.join-us">Join us / Become a member</a>
+                            </li>                            <li class="navigation__item" role="none">
+                                <a href="src/pages/news.html" class="navigation__link" role="menuitem" data-i18n="nav.news">News</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Calendar -->
+                    <li class="navigation__item" role="none">
+                        <a href="#calendar" class="navigation__link" role="menuitem" data-i18n="nav.calendar">Calendar</a>
+                    </li>
+                    
+                    <!-- Zadruga Zelenica -->
+                    <li class="navigation__item" role="none">
+                        <a href="#zadruga-zelenica" class="navigation__link" role="menuitem" data-i18n="nav.zadruga-zelenica">Zadruga Zelenica</a>
+                    </li>
+                    
+                    
+                    <!-- Get engaged with Dropdown -->
+                    <li class="navigation__item" role="none">
+                        <a href="#get-engaged" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.get-engaged">Get engaged</a>
+                        <ul class="navigation__submenu" role="menu">
+                            <li class="navigation__item" role="none">
+                                <a href="#be-volunteer" class="navigation__link" role="menuitem" data-i18n="nav.be-volunteer">Be a Volunteer</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#esc" class="navigation__link" role="menuitem" data-i18n="nav.esc">ESC (European Solidarity Corp)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Gallery -->
+                    <li class="navigation__item" role="none">
+                        <a href="#gallery" class="navigation__link" role="menuitem" data-i18n="nav.gallery">Gallery</a>
+                    </li>
+                    
+                    <!-- Projects with Complex Dropdown -->
+                    <li class="navigation__item" role="none">
+                        <a href="#projects" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.projects">Projects</a>
+                        <ul class="navigation__submenu" role="menu">                            <li class="navigation__item" role="none">
+                                <a href="#erasmus" class="navigation__link" role="menuitem" data-i18n="nav.erasmus">Erasmus</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#national" class="navigation__link" role="menuitem" data-i18n="nav.national">National</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#previous-projects" class="navigation__link" role="menuitem" data-i18n="nav.previous-projects">Previous projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Activities with Dropdown -->
+                    <li class="navigation__item" role="none">
+                        <a href="#activities" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.activities">Activities</a>
+                        <ul class="navigation__submenu" role="menu">
+                            <li class="navigation__item" role="none">
+                                <a href="#frequent-activities" class="navigation__link" role="menuitem" data-i18n="nav.frequent-activities">Frequent activities</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#see-more" class="navigation__link" role="menuitem" data-i18n="nav.see-more">See more</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content" role="main" class="main">
+        <!-- Hero Section -->
+        <section class="news-hero" aria-labelledby="news-hero-heading">
+            <div class="news-hero__container">
+                <h1 id="news-hero-heading" class="news-hero__title">
+                    <!-- News Icon -->
+                    <svg class="news-hero__icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+                    </svg>
+                    <span data-i18n="news.hero.title">Latest News</span>
+                </h1>
+                <p class="news-hero__subtitle" data-i18n="news.hero.subtitle">
+                    Stay updated with our latest activities, events, and community initiatives
+                </p>
+            </div>
+        </section>
+
+        <!-- Facebook Feed Section -->
+        <section class="facebook-feed" aria-labelledby="facebook-feed-heading">
+            <div class="facebook-feed__container">
+                <!-- Header -->
+                <header class="facebook-feed__header">
+                    <h2 id="facebook-feed-heading" class="facebook-feed__title">
+                        <!-- Facebook Icon -->
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        <span data-i18n="news.facebook.title">From our Facebook</span>
+                    </h2>
+                    <p class="facebook-feed__subtitle" data-i18n="news.facebook.subtitle">
+                        Connect with our community through our latest social media updates
+                    </p>
+                </header>
+
+                <!-- Carousel Section -->
+                <div class="facebook-carousel">
+                    <div class="swiper facebook-carousel__wrapper" id="facebook-carousel">
+                        <div class="swiper-wrapper" id="carousel-posts">
+                            <!-- Loading state -->
+                            <div class="facebook-loading">
+                                <div class="facebook-loading__spinner"></div>
+                                <span data-i18n="news.facebook.loading">Loading latest posts...</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="swiper-button-next" aria-label="Next post"></div>
+                        <div class="swiper-button-prev" aria-label="Previous post"></div>
+                        
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="facebook-gallery" aria-labelledby="gallery-heading">
+            <div class="facebook-feed__container">
+                <header class="facebook-gallery__header">
+                    <h3 id="gallery-heading" class="facebook-gallery__title" data-i18n="news.gallery.title">
+                        Recent Activities
+                    </h3>
+                    <p class="facebook-gallery__subtitle" data-i18n="news.gallery.subtitle">
+                        Browse through our recent community activities and events
+                    </p>
+                </header>
+                
+                <div class="facebook-gallery__grid" id="gallery-posts">
+                    <!-- Gallery items will be inserted here by JavaScript -->
+                    <div class="facebook-loading">
+                        <div class="facebook-loading__spinner"></div>
+                        <span data-i18n="news.gallery.loading">Loading gallery...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <aside role="complementary" class="cta" aria-labelledby="cta-heading">
+            <div class="cta__container">
+                <h2 id="cta-heading" class="cta__title" data-i18n="news.cta.title">
+                    Stay Connected
+                </h2>
+                <p class="cta__text" data-i18n="news.cta.text">
+                    Follow us on social media to stay updated with our latest activities and join our community events
+                </p>
+                <div class="hero__actions">
+                    <a href="https://www.facebook.com/vestigium.zagreb" class="button button--primary" target="_blank" rel="noopener noreferrer" data-i18n="news.cta.facebook">
+                        Follow on Facebook
+                    </a>
+                    <a href="../../index.html#involucrate" class="button button--secondary" data-i18n="news.cta.join">
+                        Join Us
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo" class="footer" itemscope itemtype="https://schema.org/Organization">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <h3 class="footer__title" itemprop="name" data-i18n="footer.title">Vestigium</h3>
+                    <p class="footer__description" itemprop="description" data-i18n="footer.description">
+                        Ecological-creative association improving community quality of life 
+                        through sustainable initiatives and education in Zagreb.
+                    </p>
+                    <div class="footer__achievements">
+                        <p class="footer__achievement" data-i18n="footer.achievement1">🏆 Changemakers Croatia 2017</p>
+                        <p class="footer__achievement" data-i18n="footer.achievement2">🌟 Social Marie Award Finalist 2018</p>
+                    </div>
+                </div>
+                
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <h4 class="footer__nav-title" data-i18n="footer.links">Links</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="../../index.html" class="footer__nav-link" data-i18n="footer.home">Home</a></li>
+                        <li><a href="../../index.html#actividades" class="footer__nav-link" data-i18n="footer.activities">Activities</a></li>
+                        <li><a href="../../index.html#nosotros" class="footer__nav-link" data-i18n="footer.about">About us</a></li>
+                        <li><a href="#news" class="footer__nav-link" data-i18n="footer.news">News</a></li>
+                        <li><a href="../../index.html#involucrate" class="footer__nav-link" data-i18n="footer.get-involved">Get involved</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="footer__involvement">
+                    <h4 class="footer__involvement-title" data-i18n="footer.involvement.title">Get Involved</h4>
+                    <p class="footer__involvement-text" data-i18n="footer.involvement.text">
+                        Join as a volunteer or member and help build a more resilient community.
+                    </p>
+                    <ul class="footer__involvement-list">
+                        <li data-i18n="footer.involvement.item1">Event volunteering</li>
+                        <li data-i18n="footer.involvement.item2">Workshops and education</li>
+                        <li data-i18n="footer.involvement.item3">Community agriculture</li>
+                        <li data-i18n="footer.involvement.item4">Organizational support</li>
+                    </ul>
+                </div>
+                
+                <div class="footer__contact" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
+                    <h4 class="footer__contact-title" data-i18n="footer.contact.title">Contact</h4>
+                    <div class="footer__contact-info" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <p><strong data-i18n="footer.location">Location:</strong></p>
+                        <p itemprop="addressLocality" data-i18n="footer.location.area">Vrbana Area, Zagreb</p>
+                        <p itemprop="addressCountry" data-i18n="footer.location.country">Croatia</p>
+                    </div>
+                    <p class="footer__contact-info">
+                        <span itemprop="email">info@vestigium.hr</span>
+                    </p>
+                    <p class="footer__contact-info">
+                        <strong data-i18n="footer.movement">Global Transition Movement</strong>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright" data-i18n="footer.copyright" data-i18n-html>
+                    &copy; 2025 Vestigium Association. All rights reserved.
+                </p>
+                <p class="footer__tech" data-i18n="footer.tech">
+                    Building sustainable communities since 2011 • Over 1000 annual activities
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Scripts -->
+    <script src="../assets/js/language-switcher.js"></script>
+    <script src="../assets/js/main.js"></script>
+    
+    <!-- Facebook Feed JavaScript -->
+    <script>
+        /**
+         * VESTIGIUM NEWS - FACEBOOK GRAPH API INTEGRATION
+         * ===============================================
+         * 
+         * CONFIGURACIÓN REQUERIDA:
+         * 
+         * 1. Crear Facebook App en https://developers.facebook.com/
+         * 2. Configurar permisos: pages_show_list, pages_read_engagement, pages_read_user_content
+         * 3. Obtener Page Access Token desde Graph API Explorer
+         * 4. Reemplazar valores en la configuración abajo
+         */
+
+        class VestigiumNewsFeed {
+            constructor() {
+                // ⚠️ CONFIGURACIÓN - REEMPLAZAR CON VALORES REALES
+                this.pageAccessToken = 'YOUR_PAGE_ACCESS_TOKEN_HERE'; // ← INSERTAR TOKEN AQUÍ
+                this.pageId = 'vestigium.zagreb'; // ← ID O USERNAME DE LA PÁGINA
+                this.apiVersion = 'v18.0';
+                
+                this.carousel = null;
+                this.posts = [];
+                this.isLoading = false;
+                
+                this.init();
+            }
+
+            async init() {
+                console.log('🚀 Inicializando Vestigium News Feed...');
+                
+                try {
+                    // Verificar si estamos en desarrollo
+                    if (this.isDevelopment()) {
+                        console.warn('🔧 Modo desarrollo detectado');
+                        this.showDevelopmentMessage();
+                        return;
+                    }
+
+                    await this.loadFacebookPosts();
+                    this.initializeCarousel();
+                    this.setupLanguageSwitching();
+                } catch (error) {
+                    console.error('❌ Error inicializando Facebook feed:', error);
+                    this.showError(error.message);
+                }
+            }
+
+            isDevelopment() {
+                return this.pageAccessToken === 'YOUR_PAGE_ACCESS_TOKEN_HERE' ||
+                       window.location.hostname === 'localhost' ||
+                       window.location.hostname === '127.0.0.1';
+            }
+
+            showDevelopmentMessage() {
+                console.log('📋 INSTRUCCIONES DE CONFIGURACIÓN:');
+                console.log('1. Crear Facebook App en https://developers.facebook.com/');
+                console.log('2. Configurar permisos necesarios');
+                console.log('3. Obtener Page Access Token');
+                console.log('4. Reemplazar token en el código');
+                
+                // Mostrar posts de demostración
+                this.loadDemoPosts();
+            }
+
+            async loadFacebookPosts() {
+                if (this.isLoading) return;
+                this.isLoading = true;
+
+                try {
+                    const apiUrl = `https://graph.facebook.com/${this.apiVersion}/${this.pageId}/posts`;
+                    const params = new URLSearchParams({
+                        access_token: this.pageAccessToken,
+                        fields: 'id,message,created_time,full_picture,permalink_url,attachments{media}',
+                        limit: 8 // 4 para carousel + 4 para galería
+                    });
+
+                    const response = await fetch(`${apiUrl}?${params}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Facebook API error: ${response.status} ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    
+                    if (data.data && data.data.length > 0) {
+                        this.posts = data.data;
+                        this.renderPosts();
+                        console.log(`✅ Cargados ${this.posts.length} posts de Facebook`);
+                    } else {
+                        throw new Error('No se encontraron posts');
+                    }
+                } catch (error) {
+                    console.error('❌ Error cargando posts de Facebook:', error);
+                    throw error;
+                } finally {
+                    this.isLoading = false;
+                }
+            }
+
+            loadDemoPosts() {
+                // Posts de demostración para desarrollo
+                this.posts = [
+                    {
+                        id: 'demo1',
+                        message: 'Join us for our weekly community garden workshop! Learn about sustainable gardening practices and connect with fellow community members. 🌱',
+                        created_time: new Date().toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/2E7D32/ffffff?text=Community+Garden',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    },
+                    {
+                        id: 'demo2',
+                        message: 'Successful completion of our zero-waste event! Thank you to all participants who helped make this initiative a great success. 🌍',
+                        created_time: new Date(Date.now() - 24*60*60*1000).toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/4CAF50/ffffff?text=Zero+Waste+Event',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    },
+                    {
+                        id: 'demo3',
+                        message: 'Poetry evening at our community center was a beautiful celebration of local talent and creativity. Next event coming soon! 📚',
+                        created_time: new Date(Date.now() - 2*24*60*60*1000).toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/1B5E20/ffffff?text=Poetry+Evening',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    },
+                    {
+                        id: 'demo4',
+                        message: 'Fresh produce from our Community Supported Agriculture program is now available! Supporting local, sustainable food systems. 🥕',
+                        created_time: new Date(Date.now() - 3*24*60*60*1000).toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/388E3C/ffffff?text=Fresh+Produce',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    },
+                    {
+                        id: 'demo5',
+                        message: 'Repair café was a huge success! Community members learned valuable skills while giving new life to old items. ♻️',
+                        created_time: new Date(Date.now() - 4*24*60*60*1000).toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/43A047/ffffff?text=Repair+Cafe',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    },
+                    {
+                        id: 'demo6',
+                        message: 'Volunteers making a difference in our neighborhood! Thank you to everyone who participated in our community cleanup. 🤝',
+                        created_time: new Date(Date.now() - 5*24*60*60*1000).toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/66BB6A/ffffff?text=Community+Cleanup',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    },
+                    {
+                        id: 'demo7',
+                        message: 'Educational workshop on composting brought together families and individuals interested in sustainable living practices. 🌿',
+                        created_time: new Date(Date.now() - 6*24*60*60*1000).toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/81C784/ffffff?text=Composting+Workshop',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    },
+                    {
+                        id: 'demo8',
+                        message: 'Monthly farmers market showcasing local producers and artisans. Supporting our local economy and sustainable practices! 🌾',
+                        created_time: new Date(Date.now() - 7*24*60*60*1000).toISOString(),
+                        full_picture: 'https://via.placeholder.com/600x400/A5D6A7/ffffff?text=Farmers+Market',
+                        permalink_url: 'https://facebook.com/vestigium.zagreb'
+                    }
+                ];
+
+                this.renderPosts();
+                this.initializeCarousel();
+                console.log('📝 Mostrando posts de demostración');
+            }
+
+            renderPosts() {
+                const carouselPosts = this.posts.slice(0, 4);
+                const galleryPosts = this.posts.slice(4, 8);
+
+                this.renderCarousel(carouselPosts);
+                this.renderGallery(galleryPosts);
+            }
+
+            renderCarousel(posts) {
+                const wrapper = document.getElementById('carousel-posts');
+                if (!wrapper) return;
+
+                wrapper.innerHTML = '';
+
+                posts.forEach(post => {
+                    const slide = this.createCarouselSlide(post);
+                    wrapper.appendChild(slide);
+                });
+            }
+
+            createCarouselSlide(post) {
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+
+                const imageUrl = this.getPostImage(post);
+                const text = this.truncateText(post.message || '', 150);
+                const date = this.formatDate(post.created_time);
+
+                slide.innerHTML = `
+                    <article class="facebook-post" itemscope itemtype="https://schema.org/SocialMediaPosting">
+                        <img 
+                            src="${imageUrl}" 
+                            alt="Vestigium community activity" 
+                            class="facebook-post__image"
+                            loading="lazy"
+                        >
+                        <div class="facebook-post__content">
+                            <time class="facebook-post__date" datetime="${post.created_time}" itemprop="datePublished">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                                </svg>
+                                ${date}
+                            </time>
+                            <p class="facebook-post__text" itemprop="text">${text}</p>
+                            <a 
+                                href="${post.permalink_url}" 
+                                class="facebook-post__link" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                itemprop="url"
+                                data-i18n="news.facebook.view-post"
+                            >
+                                View on Facebook
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                `;
+
+                return slide;
+            }
+
+            renderGallery(posts) {
+                const gallery = document.getElementById('gallery-posts');
+                if (!gallery) return;
+
+                gallery.innerHTML = '';
+
+                posts.forEach(post => {
+                    const item = this.createGalleryItem(post);
+                    gallery.appendChild(item);
+                });
+            }
+
+            createGalleryItem(post) {
+                const item = document.createElement('div');
+                item.className = 'facebook-gallery__item';
+
+                const imageUrl = this.getPostImage(post);
+                const date = this.formatDate(post.created_time, 'short');
+                const shortText = this.truncateText(post.message || '', 50);
+
+                item.innerHTML = `
+                    <img 
+                        src="${imageUrl}" 
+                        alt="Vestigium community activity" 
+                        class="facebook-gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="facebook-gallery__overlay">
+                        <div>
+                            <div style="font-size: var(--font-size-sm); margin-bottom: var(--space-xs);">${date}</div>
+                            <div style="font-size: var(--font-size-xs);">${shortText}</div>
+                        </div>
+                    </div>
+                `;
+
+                item.addEventListener('click', () => {
+                    window.open(post.permalink_url, '_blank', 'noopener,noreferrer');
+                });
+
+                return item;
+            }
+
+            initializeCarousel() {
+                const carouselElement = document.getElementById('facebook-carousel');
+                if (!carouselElement) return;
+
+                this.carousel = new Swiper('#facebook-carousel', {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loop: this.posts.length > 1,
+                    autoplay: {
+                        delay: 6000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: this.posts.length >= 3 ? 3 : this.posts.length,
+                        }
+                    }
+                });
+
+                console.log('✅ Carrusel inicializado');
+            }
+
+            setupLanguageSwitching() {
+                // Escuchar cambios de idioma
+                document.addEventListener('languageChanged', (event) => {
+                    const newLanguage = event.detail.language;
+                    console.log(`🌐 Idioma cambiado a: ${newLanguage}`);
+                    
+                    // Actualizar fechas con el nuevo idioma
+                    this.updateDatesForLanguage(newLanguage);
+                });
+
+                // Observer para cambios en el atributo lang
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+                            const newLanguage = document.documentElement.lang;
+                            this.updateDatesForLanguage(newLanguage);
+                        }
+                    });
+                });
+
+                observer.observe(document.documentElement, {
+                    attributes: true,
+                    attributeFilter: ['lang']
+                });
+            }
+
+            updateDatesForLanguage(language) {
+                // Actualizar fechas en el carousel
+                const carouselDates = document.querySelectorAll('.facebook-post__date');
+                carouselDates.forEach((dateEl, index) => {
+                    if (this.posts[index]) {
+                        const formattedDate = this.formatDate(this.posts[index].created_time, 'long', language);
+                        const textNode = dateEl.childNodes[1]; // Obtener el nodo de texto después del SVG
+                        if (textNode) {
+                            textNode.textContent = formattedDate;
+                        }
+                    }
+                });
+
+                // Actualizar fechas en la galería
+                const galleryItems = document.querySelectorAll('.facebook-gallery__overlay');
+                galleryItems.forEach((overlay, index) => {
+                    const postIndex = index + 4; // Los posts de la galería empiezan desde el índice 4
+                    if (this.posts[postIndex]) {
+                        const formattedDate = this.formatDate(this.posts[postIndex].created_time, 'short', language);
+                        const dateDiv = overlay.querySelector('div > div:first-child');
+                        if (dateDiv) {
+                            dateDiv.textContent = formattedDate;
+                        }
+                    }
+                });
+            }
+
+            getPostImage(post) {
+                return post.full_picture || 
+                       (post.attachments?.data[0]?.media?.image?.src) ||
+                       `https://via.placeholder.com/600x400/2E7D32/ffffff?text=Vestigium+Community`;
+            }
+
+            truncateText(text, maxLength) {
+                if (!text) return '';
+                return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+            }
+
+            formatDate(dateString, format = 'long', language = null) {
+                const date = new Date(dateString);
+                const currentLang = language || document.documentElement.lang || 'en';
+                
+                const options = format === 'short' ? 
+                    { month: 'short', day: 'numeric' } :
+                    { year: 'numeric', month: 'long', day: 'numeric' };
+
+                return date.toLocaleDateString(
+                    currentLang === 'hr' ? 'hr-HR' : 'en-US',
+                    options
+                );
+            }
+
+            showError(message) {
+                const errorHTML = `
+                    <div class="facebook-error">
+                        <svg class="facebook-error__icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                        <h3 data-i18n="news.facebook.error-title">Unable to load Facebook posts</h3>
+                        <p data-i18n="news.facebook.error-text">Error: ${message}</p>
+                        <p style="font-size: var(--font-size-sm); margin-top: var(--space-md); opacity: 0.7;">
+                            <span data-i18n="news.facebook.error-help">Please check the configuration and try again.</span>
+                        </p>
+                    </div>
+                `;
+
+                const carousel = document.getElementById('carousel-posts');
+                const gallery = document.getElementById('gallery-posts');
+                
+                if (carousel) carousel.innerHTML = errorHTML;
+                if (gallery) gallery.innerHTML = errorHTML;
+            }
+        }
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('📄 DOM cargado, inicializando News Feed...');
+            
+            // Pequeño delay para asegurar que otros scripts se hayan cargado
+            setTimeout(() => {
+                new VestigiumNewsFeed();
+            }, 100);
+        });
+
+        // Función de utilidad para testing
+        window.testNewsFeed = function() {
+            console.log('🧪 Testing News Feed...');
+            new VestigiumNewsFeed();
+        };
+
+        // Función para recargar el feed
+        window.reloadNewsFeed = function() {
+            console.log('🔄 Recargando News Feed...');
+            location.reload();
+        };
+    </script>
+</body>
+</html>
