@@ -1,0 +1,58 @@
+{
+  "name": "Vestigium - Ecological-Creative Association",
+  "short_name": "Vestigium",
+  "description": "Ecological-creative association improving community quality of life in Zagreb through sustainable initiatives, education and community life",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2E7D32",
+  "lang": "en",
+  "scope": "/",
+  "categories": ["lifestyle", "education", "social", "health"],  "icons": [
+    {
+      "src": "/src/assets/images/favicon/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/src/assets/images/favicon/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/src/assets/images/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [    {
+      "name": "Activities",
+      "short_name": "Activities",
+      "description": "View our community activities",
+      "url": "/#activities",
+      "icons": [
+        {
+          "src": "/src/assets/images/favicon/favicon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Get Involved",
+      "short_name": "Get Involved",
+      "description": "Join as volunteer or member",
+      "url": "/#get-involved",
+      "icons": [
+        {
+          "src": "/src/assets/images/favicon/favicon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="meta.title">Test Language Switcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .debug-panel {
+            background: #263238;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .test-buttons {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .test-buttons button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        
+        .test-buttons button:hover {
+            background: #1565c0;
+        }
+        
+        .current-state {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .log-entry {
+            margin: 5px 0;
+            padding: 2px 0;
+        }
+        
+        .log-success { color: #4caf50; }
+        .log-error { color: #f44336; }
+        .log-warning { color: #ff9800; }
+        .log-info { color: #2196f3; }
+    </style>
+    
+    <!-- Language Switcher CSS -->
+    <link rel="stylesheet" href="src/assets/css/navigation-advanced.css">
+</head>
+<body>
+    <!-- Header con selector de idioma -->
+    <div class="header__container">
+        <div class="logo">
+            <h1>🌱 Vestigium Test</h1>
+        </div>
+        <!-- El selector de idioma se insertará aquí automáticamente -->
+    </div>
+
+    <!-- Estado actual -->
+    <div class="current-state">
+        <strong>Estado Actual:</strong>
+        <div>Idioma: <span id="current-lang-display">Cargando...</span></div>
+        <div>Elemento HTML lang: <span id="html-lang-display">-</span></div>
+        <div>LocalStorage: <span id="storage-display">-</span></div>
+    </div>
+
+    <!-- Contenido de prueba -->
+    <div class="test-content">
+        <h1 data-i18n="hero.title">Building Sustainable Communities</h1>
+        <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community, promoting a healthy and sustainable lifestyle for our future.</p>
+        
+        <h2 data-i18n="activities.title">Our Activities</h2>
+        <p data-i18n="activities.subtitle">We conduct over 1000 activities annually to educate, empower and create a resilient community.</p>
+        
+        <h3 data-i18n="nav.who-are-we">Who are we?</h3>
+        <p data-i18n="about.text1" data-i18n-html="true">Vestigium (lat. footprint) was born in 2011 by the initiative of six women who listened to the needs of their neighbors in the Vrbana area, Zagreb.</p>
+        
+        <h3 data-i18n="nav.activities">Activities</h3>
+        <ul>
+            <li data-i18n="activities.education.title">Education & Workshops</li>
+            <li data-i18n="activities.community.title">Community Life</li>
+            <li data-i18n="activities.sustainability.title">Sustainability</li>
+            <li data-i18n="activities.empowerment.title">Empowerment</li>
+        </ul>
+    </div>
+
+    <!-- Panel de debug -->
+    <div class="debug-panel" id="debug-panel">
+        <div><strong>🔍 Debug Log:</strong></div>
+        <div id="debug-log"></div>
+    </div>
+
+    <!-- Botones de prueba -->
+    <div class="test-buttons">
+        <button onclick="testChangeToEnglish()">🇬🇧 Cambiar a English</button>
+        <button onclick="testChangeToCroatian()">🇭🇷 Cambiar a Hrvatski</button>
+        <button onclick="clearDebugLog()">🧹 Limpiar Log</button>
+        <button onclick="showTranslationTest()">🔍 Test Traducciones</button>
+        <button onclick="showCurrentState()">📊 Estado Actual</button>
+    </div>
+
+    <script src="src/assets/js/language-switcher.js"></script>
+    <script>
+        let debugLog = document.getElementById('debug-log');
+        let currentLangDisplay = document.getElementById('current-lang-display');
+        let htmlLangDisplay = document.getElementById('html-lang-display');
+        let storageDisplay = document.getElementById('storage-display');
+        
+        function addToDebugLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.innerHTML = `<span style="color: #888;">[${timestamp}]</span> ${message}`;
+            debugLog.appendChild(entry);
+            debugLog.scrollTop = debugLog.scrollHeight;
+            
+            // También log en consola
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        function updateCurrentState() {
+            if (window.vestigiumLanguageSwitcher) {
+                const currentLang = window.vestigiumLanguageSwitcher.getCurrentLanguage();
+                const config = window.vestigiumLanguageSwitcher.getLanguageConfig();
+                const langName = config.languages[currentLang]?.name || currentLang;
+                
+                currentLangDisplay.textContent = `${langName} (${currentLang})`;
+                htmlLangDisplay.textContent = document.documentElement.lang;
+                
+                try {
+                    const stored = localStorage.getItem('vestigium-language');
+                    storageDisplay.textContent = stored || 'No establecido';
+                } catch (e) {
+                    storageDisplay.textContent = 'Error accediendo';
+                }
+            }
+        }
+        
+        function testChangeToEnglish() {
+            addToDebugLog('🔄 Iniciando test cambio a English', 'info');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                addToDebugLog('❌ Language switcher no disponible', 'error');
+                return;
+            }
+            
+            window.vestigiumLanguageSwitcher.changeLanguageSmooth('en')
+                .then(result => {
+                    if (result) {
+                        addToDebugLog('✅ Cambio a English exitoso', 'success');
+                    } else {
+                        addToDebugLog('❌ Cambio a English falló', 'error');
+                    }
+                    updateCurrentState();
+                })
+                .catch(error => {
+                    addToDebugLog(`❌ Error cambiando a English: ${error.message}`, 'error');
+                });
+        }
+        
+        function testChangeToCroatian() {
+            addToDebugLog('🔄 Iniciando test cambio a Hrvatski', 'info');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                addToDebugLog('❌ Language switcher no disponible', 'error');
+                return;
+            }
+            
+            window.vestigiumLanguageSwitcher.changeLanguageSmooth('hr')
+                .then(result => {
+                    if (result) {
+                        addToDebugLog('✅ Cambio a Hrvatski exitoso', 'success');
+                    } else {
+                        addToDebugLog('❌ Cambio a Hrvatski falló', 'error');
+                    }
+                    updateCurrentState();
+                })
+                .catch(error => {
+                    addToDebugLog(`❌ Error cambiando a Hrvatski: ${error.message}`, 'error');
+                });
+        }
+        
+        function clearDebugLog() {
+            debugLog.innerHTML = '<div><strong>🔍 Debug Log:</strong></div>';
+        }
+        
+        function showTranslationTest() {
+            addToDebugLog('🔍 Test de traducciones:', 'info');
+            
+            const testKeys = ['hero.title', 'hero.subtitle', 'activities.title', 'nav.who-are-we'];
+            
+            testKeys.forEach(key => {
+                const enTranslation = getNestedTranslation('en', key);
+                const hrTranslation = getNestedTranslation('hr', key);
+                
+                addToDebugLog(`📝 ${key}:`, 'info');
+                addToDebugLog(`   EN: ${enTranslation ? '✅' : '❌'} ${enTranslation ? enTranslation.substring(0, 40) + '...' : 'NO ENCONTRADO'}`, enTranslation ? 'success' : 'error');
+                addToDebugLog(`   HR: ${hrTranslation ? '✅' : '❌'} ${hrTranslation ? hrTranslation.substring(0, 40) + '...' : 'NO ENCONTRADO'}`, hrTranslation ? 'success' : 'error');
+            });
+        }
+        
+        function getNestedTranslation(lang, key) {
+            if (!window.vestigiumLanguageSwitcher || !window.vestigiumLanguageSwitcher.translations) {
+                return null;
+            }
+            
+            const translations = window.vestigiumLanguageSwitcher.translations[lang];
+            if (!translations) return null;
+            
+            return key.split('.').reduce((obj, k) => obj && obj[k], translations);
+        }
+        
+        function showCurrentState() {
+            addToDebugLog('📊 Estado completo del sistema:', 'info');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                addToDebugLog('❌ Language switcher no inicializado', 'error');
+                return;
+            }
+            
+            const ls = window.vestigiumLanguageSwitcher;
+            const currentLang = ls.getCurrentLanguage();
+            const config = ls.getLanguageConfig();
+            
+            addToDebugLog(`Idioma actual: ${currentLang}`, 'info');
+            addToDebugLog(`Idiomas disponibles: ${Object.keys(config.languages).join(', ')}`, 'info');
+            addToDebugLog(`Traducciones disponibles: ${Object.keys(ls.translations).join(', ')}`, 'info');
+            addToDebugLog(`HTML lang attribute: ${document.documentElement.lang}`, 'info');
+            addToDebugLog(`Animación en progreso: ${ls.animationInProgress}`, 'info');
+            addToDebugLog(`Inicializado: ${ls.isInitialized}`, 'info');
+            
+            // Test de traducción sample
+            const sampleTranslation = ls.t('hero.title');
+            addToDebugLog(`Traducción de muestra (hero.title): "${sampleTranslation}"`, 'info');
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            addToDebugLog('📄 DOM Content Loaded', 'info');
+            
+            // Esperar un poco para que el language switcher se inicialice
+            setTimeout(() => {
+                if (window.vestigiumLanguageSwitcher) {
+                    addToDebugLog('✅ Language Switcher detectado', 'success');
+                    updateCurrentState();
+                    showCurrentState();
+                } else {
+                    addToDebugLog('❌ Language Switcher no encontrado', 'error');
+                }
+            }, 1000);
+        });
+        
+        document.addEventListener('languageChanged', function(event) {
+            addToDebugLog(`🎉 Evento languageChanged recibido: ${event.detail.previousLanguage} → ${event.detail.language}`, 'success');
+            updateCurrentState();
+        });
+        
+        // Update state every few seconds
+        setInterval(updateCurrentState, 2000);
+    </script>
+</body>
+</html>

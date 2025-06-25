@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Language Switcher</title>
+    <!-- TEST INFO: Final Debug Test -->
+    <!-- Location: /tests/language-switcher/debug-final.html -->
+    <!-- Purpose: Final debug test with comprehensive status monitoring -->
+    <!-- Debug: Monitor debug messages panel and browser console -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-info {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .status {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        
+        .test-content {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #1976d2;
+        }
+        
+        .status-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        
+        .status-table th,
+        .status-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .status-table th {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h3>🔧 Final Debug Test</h3>
+        <p><strong>Purpose:</strong> Final debug test with comprehensive status monitoring</p>
+        <p><strong>Location:</strong> /tests/language-switcher/debug-final.html</p>
+        <p><strong>Debug:</strong> Monitor debug messages panel and browser console</p>
+    </div>
+
+    <div class="container">
+        <h1>🔧 Debug Language Switcher - Final Test</h1>
+        
+        <div class="header__container">
+            <div class="header__brand">
+                <h2>Vestigium</h2>
+            </div>
+            <!-- Language selector will be inserted here -->
+        </div>
+        
+        <div class="status">
+            <h3>Estado del Sistema</h3>
+            <table class="status-table">
+                <tr>
+                    <th>Propiedad</th>
+                    <th>Valor</th>
+                </tr>
+                <tr>
+                    <td>Language Switcher Inicializado</td>
+                    <td id="init-status">-</td>
+                </tr>
+                <tr>
+                    <td>Idioma Actual</td>
+                    <td id="current-lang">-</td>
+                </tr>
+                <tr>
+                    <td>HTML lang Attribute</td>
+                    <td id="html-lang">-</td>
+                </tr>
+                <tr>
+                    <td>localStorage Language</td>
+                    <td id="storage-lang">-</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="test-content">
+            <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+            <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community, promoting a healthy and sustainable lifestyle for our future.</p>
+            
+            <h3 data-i18n="activities.title">Our Activities</h3>
+            <p data-i18n="activities.subtitle">We conduct over 1000 activities annually to educate, empower and create a resilient community.</p>
+            
+            <h3 data-i18n="nav.who-are-we">Who are we?</h3>
+            <p data-i18n="about.text1" data-i18n-html="true">
+                <strong>Vestigium (lat. footprint)</strong> was born in 2011 by the initiative of six women who listened to the needs of their neighbors in the Vrbana area, Zagreb.
+            </p>
+        </div>
+        
+        <div class="buttons">
+            <button onclick="forceChangeToEnglish()">🇬🇧 Force English</button>
+            <button onclick="forceChangeToCroatian()">🇭🇷 Force Croatian</button>
+        </div>
+        
+        <div id="debug-messages" style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin-top: 20px; font-family: monospace; font-size: 12px; max-height: 200px; overflow-y: auto;">
+            <strong>Debug Messages:</strong><br>
+        </div>
+    </div>
+
+    <script src="../../src/assets/js/language-switcher.js"></script>
+    <script>
+        let debugMessages = document.getElementById('debug-messages');
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugMessages.innerHTML += `[${timestamp}] ${message}<br>`;
+            debugMessages.scrollTop = debugMessages.scrollHeight;
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        function updateStatus() {
+            const ls = window.vestigiumLanguageSwitcher;
+            
+            document.getElementById('init-status').textContent = ls ? 'Sí' : 'No';
+            document.getElementById('current-lang').textContent = ls ? ls.getCurrentLanguage() : '-';
+            document.getElementById('html-lang').textContent = document.documentElement.lang;
+            
+            try {
+                document.getElementById('storage-lang').textContent = localStorage.getItem('vestigium-language') || 'No establecido';
+            } catch (e) {
+                document.getElementById('storage-lang').textContent = 'Error';
+            }
+        }
+        
+        async function forceChangeToEnglish() {
+            log('🔄 Forzando cambio a English...');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                log('❌ Language switcher no disponible');
+                return;
+            }
+            
+            try {
+                const result = await window.vestigiumLanguageSwitcher.changeLanguageSmooth('en');
+                log(`✅ Resultado del cambio a English: ${result}`);
+                updateStatus();
+            } catch (error) {
+                log(`❌ Error cambiando a English: ${error.message}`);
+            }
+        }
+        
+        async function forceChangeToCroatian() {
+            log('🔄 Forzando cambio a Croatian...');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                log('❌ Language switcher no disponible');
+                return;
+            }
+            
+            try {
+                const result = await window.vestigiumLanguageSwitcher.changeLanguageSmooth('hr');
+                log(`✅ Resultado del cambio a Croatian: ${result}`);
+                updateStatus();
+            } catch (error) {
+                log(`❌ Error cambiando a Croatian: ${error.message}`);
+            }
+        }
+        
+        // Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            log('📄 DOM cargado, esperando inicialización...');
+            
+            setTimeout(() => {
+                if (window.vestigiumLanguageSwitcher) {
+                    log('✅ Language Switcher encontrado');
+                    updateStatus();
+                    
+                    // Test de traducciones básico
+                    const testTranslation = window.vestigiumLanguageSwitcher.t('hero.title');
+                    log(`🔍 Test traducción hero.title: "${testTranslation}"`);
+                    
+                } else {
+                    log('❌ Language Switcher NO encontrado');
+                }
+            }, 1000);
+            
+            // Update status every 2 seconds
+            setInterval(updateStatus, 2000);
+        });
+        
+        document.addEventListener('languageChanged', function(event) {
+            log(`🎉 Evento languageChanged: ${event.detail.previousLanguage} → ${event.detail.language}`);
+            updateStatus();
+        });
+    </script>
+</body>
+</html>

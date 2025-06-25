@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Bloquear acceso a archivos de desarrollo y configuración
+Disallow: /src/
+Disallow: /docs/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.vscode/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /.gitignore
+Disallow: /README.MD
+
+# Permitir acceso a recursos públicos importantes
+Allow: /src/assets/images/
+Allow: /manifest.json
+Allow: /sitemap.xml
+
+# Tiempo de rastreo (1 segundo entre requests)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://vestigium.hr/sitemap.xml

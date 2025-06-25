@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Switcher Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        .header__container { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 4px; margin: 10px 0; }
+        .test-area { background: #f9f9f9; padding: 15px; border-radius: 4px; margin: 10px 0; }
+        .debug { background: #263238; color: white; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; margin: 10px 0; max-height: 200px; overflow-y: auto; }
+        button { background: #1976d2; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin: 5px; }
+        button:hover { background: #1565c0; }
+        .status { background: #e8f5e8; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        
+        /* Minimal Language Selector Styles */
+        .language-selector { position: relative; display: inline-block; }
+        .language-selector__toggle { display: flex; align-items: center; gap: 8px; background: white; border: 1px solid #ccc; border-radius: 4px; padding: 6px 10px; cursor: pointer; }
+        .language-selector__menu { position: absolute; top: 100%; right: 0; background: white; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); min-width: 120px; z-index: 1000; display: none; }
+        .language-selector__menu--open { display: block; }
+        .language-selector__option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 10px; border: none; background: none; cursor: pointer; }
+        .language-selector__option:hover { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Language Switcher Direct Test</h1>
+        
+        <div class="header__container">
+            <div><strong>🌱 Test Header</strong></div>
+            <!-- Language selector will be inserted here -->
+        </div>
+        
+        <div class="status" id="status">
+            <strong>Status:</strong> 
+            <span id="current-status">Loading...</span>
+        </div>
+        
+        <div class="test-area">
+            <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+            <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community, promoting a healthy and sustainable lifestyle for our future.</p>
+            <h3 data-i18n="activities.title">Our Activities</h3>
+            <p data-i18n="nav.who-are-we">Who are we?</p>
+        </div>
+        
+        <div>
+            <button onclick="testEN()">EN</button>
+            <button onclick="testHR()">HR</button>
+            <button onclick="checkState()">Check State</button>
+            <button onclick="clearLog()">Clear</button>
+        </div>
+        
+        <div class="debug" id="debug">Ready...<br></div>
+    </div>
+
+    <script>
+        // INLINE MINIMAL LANGUAGE SWITCHER FOR TESTING
+        const TEST_TRANSLATIONS = {
+            en: {
+                'hero.title': 'Building Sustainable Communities',
+                'hero.subtitle': 'Vestigium is an ecological-creative association dedicated to improving the quality of life of our community, promoting a healthy and sustainable lifestyle for our future.',
+                'activities.title': 'Our Activities',
+                'nav.who-are-we': 'Who are we?'
+            },
+            hr: {
+                'hero.title': 'Izgradnja Održivih Zajednica',
+                'hero.subtitle': 'Vestigium je ekolosko-kreativna udruga posvećena poboljšanju kvalitete života naše zajednice, promovira zdrav i održiv način života za našu budućnost.',
+                'activities.title': 'Naše Aktivnosti',
+                'nav.who-are-we': 'Tko smo mi?'
+            }
+        };
+        
+        let currentLang = 'en';
+        let debugEl = document.getElementById('debug');
+        let statusEl = document.getElementById('current-status');
+        
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            debugEl.innerHTML += `[${time}] ${msg}<br>`;
+            debugEl.scrollTop = debugEl.scrollHeight;
+            console.log(`[${time}] ${msg}`);
+        }
+        
+        function updateStatus() {
+            statusEl.textContent = `Language: ${currentLang}, HTML: ${document.documentElement.lang}`;
+        }
+        
+        function translateElement(element, key) {
+            const translation = TEST_TRANSLATIONS[currentLang][key];
+            if (translation) {
+                if (element.hasAttribute('data-i18n-html')) {
+                    element.innerHTML = translation;
+                } else {
+                    element.textContent = translation;
+                }
+                return true;
+            }
+            return false;
+        }
+        
+        function translatePage() {
+            log(`Translating to ${currentLang}`);
+            const elements = document.querySelectorAll('[data-i18n]');
+            let translated = 0;
+            
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translateElement(element, key)) {
+                    translated++;
+                } else {
+                    log(`Missing translation: ${key}`);
+                }
+            });
+            
+            log(`Translated ${translated}/${elements.length} elements`);
+        }
+        
+        function changeLang(lang) {
+            log(`Changing language to: ${lang}`);
+            const oldLang = currentLang;
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            translatePage();
+            updateStatus();
+            log(`Language changed: ${oldLang} → ${lang}`);
+        }
+        
+        function testEN() { changeLang('en'); }
+        function testHR() { changeLang('hr'); }
+        function clearLog() { debugEl.innerHTML = 'Cleared...<br>'; }
+        function checkState() {
+            log(`Current state: lang=${currentLang}, HTML lang=${document.documentElement.lang}`);
+            log(`Available translations: ${Object.keys(TEST_TRANSLATIONS).join(', ')}`);
+            log(`Test translation (hero.title): "${TEST_TRANSLATIONS[currentLang]['hero.title']}"`);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            log('DOM loaded');
+            updateStatus();
+            translatePage();
+            
+            // Try to load the actual language switcher
+            setTimeout(() => {
+                if (window.vestigiumLanguageSwitcher) {
+                    log('✅ External Language Switcher detected');
+                    log(`External switcher current lang: ${window.vestigiumLanguageSwitcher.getCurrentLanguage()}`);
+                } else {
+                    log('❌ External Language Switcher not found - using inline test version');
+                }
+            }, 1000);
+        });
+    </script>
+    
+    <!-- Try to load the actual language switcher -->
+    <script src="src/assets/js/language-switcher.js"></script>
+</body>
+</html>

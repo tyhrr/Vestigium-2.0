@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Translation Issue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .debug-info {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+        
+        button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #1976d2;
+        }
+        
+        .test-content {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .element-status {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid #ccc;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .element-status.translated {
+            border-left-color: #4caf50;
+            background: #e8f5e8;
+        }
+        
+        .element-status.not-translated {
+            border-left-color: #f44336;
+            background: #ffe8e8;
+        }
+    </style>
+    
+    <!-- Language Switcher CSS -->
+    <link rel="stylesheet" href="../../src/assets/css/navigation-advanced.css">
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Debug Translation Issue</h1>
+        <p>Diagnóstico específico del problema de traducción</p>
+        
+        <div class="header__container">
+            <div class="header__brand">
+                <h2>Vestigium Test</h2>
+            </div>
+            <!-- Language selector will be inserted here -->
+        </div>
+        
+        <div class="test-content">
+            <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+            <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association...</p>
+            
+            <h3 data-i18n="activities.title">Our Activities</h3>
+            <p data-i18n="activities.subtitle">We conduct over 1000 activities annually...</p>
+            
+            <h3 data-i18n="nav.who-are-we">Who are we?</h3>
+            <p data-i18n="about.text1" data-i18n-html="true">Vestigium (lat. footprint) was born in 2011...</p>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="testTranslationDirectly()">🔍 Test Direct Translation</button>
+            <button onclick="forceTranslatePage()">🔄 Force Translate Page</button>
+            <button onclick="analyzeElements()">📊 Analyze Elements</button>
+            <button onclick="testIndividualTranslation()">🧪 Test Individual</button>
+        </div>
+        
+        <div class="debug-info" id="debug-info">
+            Debug information will appear here...
+        </div>
+        
+        <div id="element-analysis" style="margin-top: 20px;">
+            <h3>Element Analysis</h3>
+            <div id="element-list"></div>
+        </div>
+    </div>
+
+    <script src="../../src/assets/js/language-switcher.js"></script>
+    <script>
+        let debugInfo = document.getElementById('debug-info');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'color: #f44336;' : type === 'warning' ? 'color: #ff9800;' : type === 'success' ? 'color: #4caf50;' : '';
+            debugInfo.innerHTML += `<div style="${className}">[${timestamp}] ${message}</div>`;
+            debugInfo.scrollTop = debugInfo.scrollHeight;
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        function testTranslationDirectly() {
+            log('🔍 Testing translation function directly...', 'info');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                log('❌ Language switcher not available', 'error');
+                return;
+            }
+            
+            const ls = window.vestigiumLanguageSwitcher;
+            
+            // Test basic translation function
+            const testKeys = ['hero.title', 'hero.subtitle', 'activities.title', 'nav.who-are-we'];
+            
+            testKeys.forEach(key => {
+                const enTranslation = ls.translations.en[key.split('.')[0]][key.split('.')[1]];
+                const hrTranslation = ls.translations.hr[key.split('.')[0]][key.split('.')[1]];
+                const currentTranslation = ls.t(key);
+                
+                log(`📝 Key: ${key}`, 'info');
+                log(`   EN Direct: ${enTranslation}`, 'info');
+                log(`   HR Direct: ${hrTranslation}`, 'info');
+                log(`   Current t(): ${currentTranslation}`, 'info');
+                log(`   Match? ${currentTranslation === (ls.currentLanguage === 'en' ? enTranslation : hrTranslation)}`, currentTranslation === (ls.currentLanguage === 'en' ? enTranslation : hrTranslation) ? 'success' : 'error');
+            });
+        }
+        
+        function forceTranslatePage() {
+            log('🔄 Forcing page translation...', 'info');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                log('❌ Language switcher not available', 'error');
+                return;
+            }
+            
+            const ls = window.vestigiumLanguageSwitcher;
+            
+            // Change to Croatian first
+            log(`Current language: ${ls.currentLanguage}`, 'info');
+            log('Changing to Croatian...', 'info');
+            
+            ls.currentLanguage = 'hr';
+            log(`Language updated to: ${ls.currentLanguage}`, 'info');
+            
+            // Force translate page
+            ls.translatePage();
+            
+            log('Translation completed', 'success');
+        }
+        
+        function analyzeElements() {
+            log('📊 Analyzing all elements with data-i18n...', 'info');
+            
+            const elements = document.querySelectorAll('[data-i18n]');
+            const elementList = document.getElementById('element-list');
+            elementList.innerHTML = '';
+            
+            log(`Found ${elements.length} elements with data-i18n`, 'info');
+            
+            elements.forEach((element, index) => {
+                const key = element.getAttribute('data-i18n');
+                const currentText = element.textContent.trim();
+                const hasHtml = element.hasAttribute('data-i18n-html');
+                
+                log(`Element ${index + 1}: key="${key}", text="${currentText.substring(0, 50)}...", hasHtml=${hasHtml}`, 'info');
+                
+                // Create visual element
+                const statusDiv = document.createElement('div');
+                statusDiv.className = 'element-status';
+                statusDiv.innerHTML = `
+                    <strong>${index + 1}. ${key}</strong><br>
+                    Text: "${currentText.substring(0, 100)}..."<br>
+                    HTML Mode: ${hasHtml}<br>
+                    Element: ${element.tagName.toLowerCase()}
+                `;
+                elementList.appendChild(statusDiv);
+            });
+        }
+        
+        function testIndividualTranslation() {
+            log('🧪 Testing individual element translation...', 'info');
+            
+            if (!window.vestigiumLanguageSwitcher) {
+                log('❌ Language switcher not available', 'error');
+                return;
+            }
+            
+            const ls = window.vestigiumLanguageSwitcher;
+            const testElement = document.querySelector('[data-i18n="hero.title"]');
+            
+            if (!testElement) {
+                log('❌ Test element not found', 'error');
+                return;
+            }
+            
+            log(`Original text: "${testElement.textContent}"`, 'info');
+            
+            // Test English translation
+            ls.currentLanguage = 'en';
+            const enTranslation = ls.t('hero.title');
+            log(`EN translation: "${enTranslation}"`, 'info');
+            testElement.textContent = enTranslation;
+            log(`Element updated to EN`, 'success');
+            
+            setTimeout(() => {
+                // Test Croatian translation
+                ls.currentLanguage = 'hr';
+                const hrTranslation = ls.t('hero.title');
+                log(`HR translation: "${hrTranslation}"`, 'info');
+                testElement.textContent = hrTranslation;
+                log(`Element updated to HR`, 'success');
+            }, 2000);
+        }
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🚀 Initializing debug page...', 'info');
+            
+            setTimeout(() => {
+                if (window.vestigiumLanguageSwitcher) {
+                    log('✅ Language switcher found', 'success');
+                    log(`Current language: ${window.vestigiumLanguageSwitcher.currentLanguage}`, 'info');
+                    log(`Translations available: ${Object.keys(window.vestigiumLanguageSwitcher.translations).join(', ')}`, 'info');
+                    
+                    // Test translation function immediately
+                    setTimeout(() => {
+                        testTranslationDirectly();
+                        analyzeElements();
+                    }, 1000);
+                } else {
+                    log('❌ Language switcher not found', 'error');
+                }
+            }, 500);
+        });
+        
+        // Listen for language change events
+        document.addEventListener('languageChanged', function(event) {
+            log(`🎉 Language changed event: ${event.detail.previousLanguage} → ${event.detail.language}`, 'success');
+            
+            // Re-analyze elements after change
+            setTimeout(() => {
+                analyzeElements();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

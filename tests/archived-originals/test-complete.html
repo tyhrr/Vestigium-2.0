@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="meta.title">Vestigium - Building Sustainable Communities</title>
+    <meta name="description" content="Vestigium ecological-creative association" data-i18n-attr="content:meta.description">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            margin: 0;
+            color: #2e7d32;
+            font-size: 1.8rem;
+        }
+        
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .hero__title {
+            font-size: 2.5rem;
+            color: #1b5e20;
+            margin-bottom: 1rem;
+        }
+        
+        .hero__subtitle {
+            font-size: 1.2rem;
+            color: #424242;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero__actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .button {
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .button--primary {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .button--primary:hover {
+            background: #45a049;
+        }
+        
+        .button--secondary {
+            background: transparent;
+            color: #4caf50;
+            border: 2px solid #4caf50;
+        }
+        
+        .button--secondary:hover {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .services {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .services__title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #1b5e20;
+            margin-bottom: 1rem;
+        }
+        
+        .services__description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #616161;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .service-card__title {
+            font-size: 1.3rem;
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card__description {
+            color: #616161;
+        }
+        
+        .about {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .about__title {
+            font-size: 2.2rem;
+            color: #1b5e20;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .about__text {
+            font-size: 1.1rem;
+            color: #424242;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Language Selector Styles */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-selector__toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            min-width: 120px;
+        }
+        
+        .language-selector__toggle:hover {
+            border-color: #4caf50;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+        }
+        
+        .language-selector__flag {
+            font-size: 18px;
+        }
+        
+        .language-selector__current {
+            flex: 1;
+        }
+        
+        .language-selector__icon {
+            transition: transform 0.2s ease;
+            color: #666;
+        }
+        
+        .language-selector__toggle[aria-expanded="true"] {
+            border-color: #4caf50;
+        }
+        
+        .language-selector__toggle[aria-expanded="true"] .language-selector__icon {
+            transform: rotate(180deg);
+        }
+        
+        .language-selector__menu {
+            position: absolute;
+            top: calc(100% + 4px);
+            right: 0;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            min-width: 150px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.2s ease;
+        }
+        
+        .language-selector__menu--open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-selector__option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            text-align: left;
+        }
+        
+        .language-selector__option:hover {
+            background: #f5f5f5;
+        }
+        
+        .language-selector__option:first-child {
+            border-radius: 6px 6px 0 0;
+        }
+        
+        .language-selector__option:last-child {
+            border-radius: 0 0 6px 6px;
+        }
+        
+        /* Status indicator */
+        .debug-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #263238;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        
+        .debug-status__current {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header__container {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero__title {
+                font-size: 2rem;
+            }
+            
+            .main {
+                padding: 1rem;
+            }
+            
+            .debug-status {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header role="banner" class="header">
+        <div class="header__container">
+            <div class="logo">
+                <h1>🌱 Vestigium</h1>
+            </div>
+            <!-- Language selector will be inserted here by JavaScript -->
+        </div>
+    </header>
+    
+    <main role="main" class="main">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <h1 id="hero-heading" class="hero__title" data-i18n="hero.title">
+                Building Sustainable Communities
+            </h1>
+            <p class="hero__subtitle" data-i18n="hero.subtitle">
+                Vestigium is an ecological-creative association dedicated to improving the quality of life 
+                of our community, promoting a healthy and sustainable lifestyle for our future.
+            </p>
+            <div class="hero__actions">
+                <a href="#activities" class="button button--primary" data-i18n="hero.btn-activities">Discover Activities</a>
+                <a href="#join" class="button button--secondary" data-i18n="hero.btn-join">Join Us</a>
+            </div>
+        </section>
+        
+        <!-- Activities Section -->
+        <section id="activities" class="services" aria-labelledby="services-heading">
+            <h2 id="services-heading" class="services__title" data-i18n="activities.title">
+                Our Activities
+            </h2>
+            <p class="services__description" data-i18n="activities.subtitle">
+                We conduct over 1000 activities annually to educate, empower and create a resilient community.
+            </p>
+            
+            <div class="services__grid">
+                <article class="service-card">
+                    <h3 class="service-card__title" data-i18n="activities.education.title">Education & Workshops</h3>
+                    <p class="service-card__description" data-i18n="activities.education.description">
+                        Workshops on urban gardening, composting, social permaculture, healthy cooking, sewing and relaxation for all ages.
+                    </p>
+                </article>
+                
+                <article class="service-card">
+                    <h3 class="service-card__title" data-i18n="activities.community.title">Community Life</h3>
+                    <p class="service-card__description" data-i18n="activities.community.description">
+                        Farmers market, free library, poetry evenings, storytelling, swap shops and family gatherings.
+                    </p>
+                </article>
+                
+                <article class="service-card">
+                    <h3 class="service-card__title" data-i18n="activities.sustainability.title">Sustainability</h3>
+                    <p class="service-card__description" data-i18n="activities.sustainability.description">
+                        Community Supported Agriculture, zero-waste events, repair cafés, and promotion of small ethical local businesses.
+                    </p>
+                </article>
+                
+                <article class="service-card">
+                    <h3 class="service-card__title" data-i18n="activities.empowerment.title">Empowerment</h3>
+                    <p class="service-card__description" data-i18n="activities.empowerment.description">
+                        Women empowerment support, addiction prevention, sociocracy and Theatre of the Oppressed for social change.
+                    </p>
+                </article>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="about" aria-labelledby="about-heading">
+            <h2 id="about-heading" class="about__title" data-i18n="about.title">
+                About Vestigium
+            </h2>
+            <p class="about__text" data-i18n="about.text1" data-i18n-html="true">
+                <strong>Vestigium (lat. footprint)</strong> was born in 2011 by the initiative of six women who listened to the needs of their neighbors in the Vrbana area, Zagreb. We created a multifunctional space where initiatives can develop and flourish.
+            </p>
+            <p class="about__text" data-i18n="about.text2" data-i18n-html="true">
+                As part of the <strong>Global Transition Movement for Sustainable Communities</strong>, we work to solve problems such as the growing distance between people, the lack of meeting and socializing places, and the exclusion of families and elderly residents.
+            </p>
+            <p class="about__text" data-i18n="about.text3">
+                Since 2017 we are beneficiaries of institutional support from the National Foundation for Civil Society Development. In 2017 we were presented as an inspiring example "Changemakers" from Croatia, and in 2018 nominated among the top 30 projects for the "Social Marie Award" among 250 European socially innovative projects.
+            </p>
+        </section>
+    </main>
+    
+    <!-- Debug Status -->
+    <div class="debug-status" id="debug-status">
+        <div>Language Switcher Status</div>
+        <div>Current: <span class="debug-status__current" id="status-current">Loading...</span></div>
+        <div>HTML Lang: <span id="status-html">-</span></div>
+        <div>Initialized: <span id="status-init">No</span></div>
+    </div>
+    
+    <script src="src/assets/js/language-switcher.js"></script>
+    <script>
+        // Debug status updater
+        function updateDebugStatus() {
+            const statusCurrent = document.getElementById('status-current');
+            const statusHtml = document.getElementById('status-html');
+            const statusInit = document.getElementById('status-init');
+            
+            if (window.vestigiumLanguageSwitcher) {
+                const ls = window.vestigiumLanguageSwitcher;
+                const currentLang = ls.getCurrentLanguage();
+                const config = ls.getLanguageConfig();
+                const langName = config.languages[currentLang]?.name || currentLang;
+                
+                statusCurrent.textContent = `${langName} (${currentLang})`;
+                statusInit.textContent = ls.isInitialized ? 'Yes' : 'No';
+            } else {
+                statusCurrent.textContent = 'Not loaded';
+                statusInit.textContent = 'No';
+            }
+            
+            statusHtml.textContent = document.documentElement.lang;
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Test page loaded');
+            setTimeout(updateDebugStatus, 500);
+            setInterval(updateDebugStatus, 2000);
+        });
+        
+        document.addEventListener('languageChanged', function(event) {
+            console.log('📢 Language changed event:', event.detail);
+            updateDebugStatus();
+        });
+        
+        // Add manual test functions to global scope for console testing
+        window.testLanguageChange = function(lang) {
+            if (window.vestigiumLanguageSwitcher) {
+                console.log(`🧪 Manual test: changing to ${lang}`);
+                window.vestigiumLanguageSwitcher.changeLanguageSmooth(lang)
+                    .then(result => {
+                        console.log(`🧪 Manual test result: ${result}`);
+                        updateDebugStatus();
+                    })
+                    .catch(error => {
+                        console.error(`🧪 Manual test error: ${error}`);
+                    });
+            } else {
+                console.error('🧪 Language switcher not available');
+            }
+        };
+        
+        // Debug helpers
+        window.debugLS = function() {
+            if (window.vestigiumLanguageSwitcher) {
+                const ls = window.vestigiumLanguageSwitcher;
+                console.log('=== Language Switcher Debug Info ===');
+                console.log('Current Language:', ls.getCurrentLanguage());
+                console.log('Is Initialized:', ls.isInitialized);
+                console.log('Animation in Progress:', ls.animationInProgress);
+                console.log('Available Languages:', Object.keys(ls.getLanguageConfig().languages));
+                console.log('Available Translations:', Object.keys(ls.translations));
+                console.log('HTML Lang Attribute:', document.documentElement.lang);
+                console.log('Sample Translation (hero.title):', ls.t('hero.title'));
+                console.log('Sample Translation (hero.title) for HR:', ls.translations.hr['hero.title']);
+            } else {
+                console.error('Language switcher not available');
+            }
+        };
+        
+        console.log('🔧 Debug functions available:');
+        console.log('- testLanguageChange("en") or testLanguageChange("hr")');
+        console.log('- debugLS() for full debug info');
+    </script>
+</body>
+</html>

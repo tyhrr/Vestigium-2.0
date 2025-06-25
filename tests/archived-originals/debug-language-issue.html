@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Language Switch Issue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f0f0f0;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        
+        .content {
+            background: white;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .debug-panel {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .debug-item {
+            margin: 0.5rem 0;
+            padding: 0.25rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .debug-item:last-child {
+            border-bottom: none;
+        }
+        
+        .debug-value {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        /* Language Selector Styles - Copia de navigation-advanced.css */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-selector__toggle {
+            background: #2E7D32;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .language-selector__toggle:hover {
+            background: #1B5E20;
+            transform: translateY(-1px);
+        }
+        
+        .language-selector__flag {
+            font-size: 1.1rem;
+        }
+        
+        .language-selector__icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+        
+        .language-selector__toggle[aria-expanded="true"] .language-selector__icon {
+            transform: rotate(180deg);
+        }
+        
+        .language-selector__menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 140px;
+            display: none;
+            z-index: 1000;
+            margin-top: 0.25rem;
+        }
+        
+        .language-selector__menu--open {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .language-selector__option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .language-selector__option:hover {
+            background: #f5f5f5;
+        }
+        
+        .manual-test {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.25rem;
+        }
+        
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐛 Debug: Language Switch Issue</h1>
+    
+    <div class="header__container">
+        <div class="header__brand">
+            <h2>Vestigium Debug</h2>
+        </div>
+        <!-- Language selector will be inserted here -->
+    </div>
+
+    <div class="content">
+        <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+        <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community.</p>
+        
+        <h3 data-i18n="activities.title">Our Activities</h3>
+        <p data-i18n="activities.subtitle">We conduct over 1000 activities annually to educate, empower and create a resilient community.</p>
+        
+        <div style="margin-top: 2rem;">
+            <h4>Navigation Test:</h4>
+            <ul>
+                <li><span data-i18n="nav.community-center">Community Center</span></li>
+                <li><span data-i18n="nav.calendar">Calendar</span></li>
+                <li><span data-i18n="nav.projects">Projects</span></li>
+                <li><span data-i18n="nav.activities">Activities</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="debug-panel">
+        <h3>🔍 Debug Information</h3>
+        <div id="debug-info">
+            <div class="debug-item">
+                <strong>Loading...</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="manual-test">
+        <h3>🧪 Manual Tests</h3>
+        <p>Use these buttons to test language switching manually:</p>
+        <button class="test-button" onclick="testLanguageSwitch('en')">🇬🇧 Switch to English</button>
+        <button class="test-button" onclick="testLanguageSwitch('hr')">🇭🇷 Switch to Croatian</button>
+        <button class="test-button" onclick="checkSystem()">🔍 Check System Status</button>
+        <button class="test-button" onclick="clearDebug()">🧹 Clear Debug</button>
+    </div>
+
+    <script>
+        let debugMessages = [];
+
+        function addDebug(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = { time: timestamp, message, type };
+            debugMessages.push(logEntry);
+            updateDebugPanel();
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function updateDebugPanel() {
+            const debugInfo = document.getElementById('debug-info');
+            debugInfo.innerHTML = '';
+            
+            debugMessages.slice(-20).forEach(entry => {
+                const div = document.createElement('div');
+                div.className = 'debug-item';
+                const color = entry.type === 'error' ? '#dc3545' : 
+                            entry.type === 'warn' ? '#ffc107' : 
+                            entry.type === 'success' ? '#28a745' : '#007bff';
+                div.innerHTML = `
+                    <span style="color: #6c757d;">[${entry.time}]</span> 
+                    <span style="color: ${color};">${entry.message}</span>
+                `;
+                debugInfo.appendChild(div);
+            });
+        }
+
+        function clearDebug() {
+            debugMessages = [];
+            updateDebugPanel();
+        }
+
+        function testLanguageSwitch(lang) {
+            addDebug(`🧪 Manual test: Switching to ${lang}`, 'info');
+            
+            if (window.vestigiumLanguageSwitcher) {
+                addDebug(`Current language before: ${window.vestigiumLanguageSwitcher.getCurrentLanguage()}`, 'info');
+                
+                try {
+                    window.vestigiumLanguageSwitcher.changeLanguageSmooth(lang);
+                    addDebug(`Language switch command sent for: ${lang}`, 'success');
+                } catch (error) {
+                    addDebug(`Error during manual switch: ${error.message}`, 'error');
+                }
+            } else {
+                addDebug('❌ No LanguageSwitcher instance available', 'error');
+            }
+        }
+
+        function checkSystem() {
+            addDebug('🔍 Checking system status...', 'info');
+            
+            // Check if LanguageSwitcher class exists
+            if (typeof LanguageSwitcher !== 'undefined') {
+                addDebug('✅ LanguageSwitcher class loaded', 'success');
+            } else {
+                addDebug('❌ LanguageSwitcher class NOT loaded', 'error');
+                return;
+            }
+
+            // Check if instance exists
+            if (window.vestigiumLanguageSwitcher) {
+                addDebug('✅ LanguageSwitcher instance exists', 'success');
+                addDebug(`Current language: ${window.vestigiumLanguageSwitcher.getCurrentLanguage()}`, 'info');
+                
+                // Check if initialized
+                if (window.vestigiumLanguageSwitcher.isInitialized) {
+                    addDebug('✅ Instance is initialized', 'success');
+                } else {
+                    addDebug('⚠️ Instance NOT initialized', 'warn');
+                }
+            } else {
+                addDebug('❌ LanguageSwitcher instance NOT exists', 'error');
+                return;
+            }
+
+            // Check DOM elements
+            const toggle = document.querySelector('.language-selector__toggle');
+            const menu = document.querySelector('.language-selector__menu');
+            const options = document.querySelectorAll('.language-selector__option');
+
+            addDebug(`Toggle element: ${toggle ? '✅ Found' : '❌ Not found'}`, toggle ? 'success' : 'error');
+            addDebug(`Menu element: ${menu ? '✅ Found' : '❌ Not found'}`, menu ? 'success' : 'error');
+            addDebug(`Option elements: ${options.length} found`, options.length > 0 ? 'success' : 'error');
+
+            // Check data-i18n elements
+            const i18nElements = document.querySelectorAll('[data-i18n]');
+            addDebug(`Elements with data-i18n: ${i18nElements.length}`, 'info');
+
+            // Check translations
+            if (window.vestigiumLanguageSwitcher) {
+                const testKey = 'hero.title';
+                const enTranslation = window.vestigiumLanguageSwitcher.translations.en[testKey];
+                const hrTranslation = window.vestigiumLanguageSwitcher.translations.hr[testKey];
+                
+                addDebug(`EN translation for "${testKey}": ${enTranslation || 'NOT FOUND'}`, enTranslation ? 'success' : 'error');
+                addDebug(`HR translation for "${testKey}": ${hrTranslation || 'NOT FOUND'}`, hrTranslation ? 'success' : 'error');
+            }
+        }
+
+        // Event listeners for language changes
+        document.addEventListener('languageChanged', function(e) {
+            addDebug(`🌐 Language changed event fired: ${e.detail.language}`, 'success');
+            addDebug(`Previous language: ${e.detail.previousLanguage}`, 'info');
+            
+            setTimeout(() => {
+                checkSystem();
+            }, 100);
+        });
+
+        // DOM loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            addDebug('📄 DOM loaded', 'success');
+            
+            setTimeout(() => {
+                checkSystem();
+            }, 1000);
+        });
+
+        // Check periodically
+        let checkInterval = setInterval(() => {
+            if (window.vestigiumLanguageSwitcher) {
+                addDebug('📊 Periodic check: System ready', 'info');
+                clearInterval(checkInterval);
+                
+                // Check if clicking works
+                setTimeout(() => {
+                    const options = document.querySelectorAll('.language-selector__option');
+                    if (options.length > 0) {
+                        addDebug(`Found ${options.length} language options`, 'info');
+                        options.forEach((option, index) => {
+                            const lang = option.dataset.lang;
+                            addDebug(`Option ${index + 1}: ${lang} (${option.textContent.trim()})`, 'info');
+                        });
+                    }
+                }, 500);
+            }
+        }, 500);
+
+        // Clear interval after 10 seconds
+        setTimeout(() => {
+            if (checkInterval) {
+                clearInterval(checkInterval);
+                addDebug('⏰ Periodic check stopped', 'info');
+            }
+        }, 10000);
+    </script>
+    
+    <script src="/src/assets/js/language-switcher.js"></script>
+</body>
+</html>

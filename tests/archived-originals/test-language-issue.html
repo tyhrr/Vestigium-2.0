@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Language Issue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .current-lang {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .test-content {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .debug-info {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #1565c0;
+        }
+        
+        .success { color: #4caf50; }
+        .error { color: #f44336; }
+        .warning { color: #ff9800; }
+    </style>
+    
+    <!-- Language Switcher CSS -->
+    <link rel="stylesheet" href="src/assets/css/navigation-advanced.css">
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Test Language Switcher Issue</h1>
+        <p>Testing the Croatian language switching problem</p>
+        
+        <div class="current-lang" id="current-language">
+            Current Language: <span id="lang-display">Loading...</span>
+        </div>
+        
+        <div class="test-content">
+            <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+            <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association...</p>
+            
+            <h3 data-i18n="activities.title">Our Activities</h3>
+            <p data-i18n="activities.subtitle">We conduct over 1000 activities annually...</p>
+            
+            <h3 data-i18n="nav.who-are-we">Who are we?</h3>
+            <p data-i18n="about.text1" data-i18n-html="true">Vestigium (lat. footprint) was born in 2011...</p>
+        </div>
+        
+        <div class="debug-info" id="debug-info">
+            Debug information will appear here...
+        </div>
+        
+        <div>
+            <button onclick="testDirectLanguageChange('en')">🇬🇧 Change to English</button>
+            <button onclick="testDirectLanguageChange('hr')">🇭🇷 Change to Croatian</button>
+            <button onclick="showTranslationKeys()">🔍 Show Translation Keys</button>
+            <button onclick="testCurrentLanguage()">📊 Test Current Language</button>
+        </div>
+    </div>
+
+    <script src="src/assets/js/language-switcher.js"></script>
+    <script>
+        let languageSwitcher;
+        let debugInfo = document.getElementById('debug-info');
+        let langDisplay = document.getElementById('lang-display');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'warning' ? 'warning' : type === 'success' ? 'success' : '';
+            debugInfo.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        function updateCurrentLanguageDisplay() {
+            if (languageSwitcher) {
+                const currentLang = languageSwitcher.getCurrentLanguage();
+                const config = languageSwitcher.getLanguageConfig();
+                const langName = config.languages[currentLang]?.name || currentLang;
+                langDisplay.textContent = `${langName} (${currentLang})`;
+            }
+        }
+        
+        function testDirectLanguageChange(language) {
+            log(`🔄 Testing direct language change to: ${language}`);
+            
+            if (!languageSwitcher) {
+                log('❌ Language switcher not initialized', 'error');
+                return;
+            }
+            
+            const beforeLang = languageSwitcher.getCurrentLanguage();
+            log(`📍 Current language before change: ${beforeLang}`);
+            
+            // Test if language is supported
+            if (!languageSwitcher.isLanguageSupported(language)) {
+                log(`❌ Language not supported: ${language}`, 'error');
+                return;
+            }
+            
+            // Attempt to change language
+            languageSwitcher.changeLanguageSmooth(language)
+                .then(() => {
+                    const afterLang = languageSwitcher.getCurrentLanguage();
+                    log(`📍 Current language after change: ${afterLang}`);
+                    
+                    if (afterLang === language) {
+                        log(`✅ Language change successful to: ${language}`, 'success');
+                    } else {
+                        log(`❌ Language change failed. Expected: ${language}, Got: ${afterLang}`, 'error');
+                    }
+                    
+                    updateCurrentLanguageDisplay();
+                })
+                .catch(error => {
+                    log(`❌ Error changing language: ${error.message}`, 'error');
+                });
+        }
+        
+        function showTranslationKeys() {
+            log('🔍 Checking translation keys...');
+            
+            const testKeys = [
+                'hero.title',
+                'hero.subtitle', 
+                'activities.title',
+                'nav.who-are-we',
+                'about.text1'
+            ];
+            
+            testKeys.forEach(key => {
+                const enTranslation = languageSwitcher.translations.en;
+                const hrTranslation = languageSwitcher.translations.hr;
+                
+                const enValue = getNestedValue(enTranslation, key);
+                const hrValue = getNestedValue(hrTranslation, key);
+                
+                log(`📝 ${key}:`);
+                log(`   EN: ${enValue ? '✅' : '❌'} ${enValue ? enValue.substring(0, 50) + '...' : 'NOT FOUND'}`);
+                log(`   HR: ${hrValue ? '✅' : '❌'} ${hrValue ? hrValue.substring(0, 50) + '...' : 'NOT FOUND'}`);
+            });
+        }
+        
+        function getNestedValue(obj, key) {
+            return key.split('.').reduce((o, k) => o && o[k], obj);
+        }
+        
+        function testCurrentLanguage() {
+            log('📊 Testing current language info...');
+            
+            if (!languageSwitcher) {
+                log('❌ Language switcher not available', 'error');
+                return;
+            }
+            
+            const currentLang = languageSwitcher.getCurrentLanguage();
+            const config = languageSwitcher.getLanguageConfig();
+            const isSupported = languageSwitcher.isLanguageSupported(currentLang);
+            
+            log(`Current Language: ${currentLang}`);
+            log(`Is Supported: ${isSupported}`);
+            log(`Available Languages: ${Object.keys(config.languages).join(', ')}`);
+            log(`Translation Object Keys: ${Object.keys(languageSwitcher.translations).join(', ')}`);
+            
+            // Test a sample translation
+            const sampleTranslation = languageSwitcher.t('hero.title');
+            log(`Sample Translation (hero.title): ${sampleTranslation}`);
+        }
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            log('🚀 Initializing test page...');
+            
+            try {
+                languageSwitcher = new LanguageSwitcher();
+                log('✅ Language switcher initialized successfully', 'success');
+                updateCurrentLanguageDisplay();
+                
+                // Listen for language change events
+                document.addEventListener('languageChanged', function(event) {
+                    log(`🎉 Language changed event received: ${event.detail.previousLanguage} → ${event.detail.language}`, 'success');
+                    updateCurrentLanguageDisplay();
+                });
+                
+                // Test initial state
+                setTimeout(() => {
+                    testCurrentLanguage();
+                }, 500);
+                
+            } catch (error) {
+                log(`❌ Error initializing language switcher: ${error.message}`, 'error');
+            }
+        });
+    </script>
+</body>
+</html>

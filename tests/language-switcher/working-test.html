@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="meta.title">Vestigium - Ecological-Creative Association for Sustainable Communities</title>
+    <meta name="description" content="Vestigium is an association in Zagreb that improves community quality of life by promoting a healthy and sustainable lifestyle through educational and ecological activities.">
+    <!-- TEST INFO: Working Test Page -->
+    <!-- Location: /tests/language-switcher/working-test.html -->
+    <!-- Purpose: Full working test with complete styling and functionality -->
+    <!-- Debug: Check status messages and browser console -->
+    
+    <!-- Basic Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .test-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #fdcb6e;
+        }
+        
+        .header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header__logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+        
+        .header__logo a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section h1, .section h2 {
+            color: #2E7D32;
+            margin-bottom: 1rem;
+        }
+        
+        .section p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nav-list li {
+            background: #e8f5e8;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        .nav-list a {
+            text-decoration: none;
+            color: #2E7D32;
+            font-weight: 500;
+        }
+        
+        /* Language Selector Styles */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-selector__toggle {
+            background: #2E7D32;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .language-selector__toggle:hover {
+            background: #1B5E20;
+            transform: translateY(-1px);
+        }
+        
+        .language-selector__flag {
+            font-size: 1.1rem;
+        }
+        
+        .language-selector__icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+        
+        .language-selector__toggle[aria-expanded="true"] .language-selector__icon {
+            transform: rotate(180deg);
+        }
+        
+        .language-selector__menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 140px;
+            display: none;
+            z-index: 1000;
+            margin-top: 0.25rem;
+        }
+        
+        .language-selector__menu--open {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .language-selector__option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .language-selector__option:hover {
+            background: #f5f5f5;
+        }
+        
+        .language-selector__option:first-child {
+            border-radius: 6px 6px 0 0;
+        }
+        
+        .language-selector__option:last-child {
+            border-radius: 0 0 6px 6px;
+        }
+        
+        .status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            max-width: 300px;
+            display: none;
+        }
+        
+        .status.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h3>🧪 Working Test Page</h3>
+        <p><strong>Purpose:</strong> Full working test with complete styling and functionality</p>
+        <p><strong>Location:</strong> /tests/language-switcher/working-test.html</p>
+        <p><strong>Debug:</strong> Check status messages and browser console</p>
+    </div>
+
+    <header class="header">
+        <div class="header__container">
+            <div class="header__brand">
+                <h1 class="header__logo">
+                    <a href="/">Vestigium</a>
+                </h1>
+            </div>
+            <!-- Language selector will be inserted here -->
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section">
+            <h1 data-i18n="hero.title">Building Sustainable Communities</h1>
+            <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community, promoting a healthy and sustainable lifestyle for our future.</p>
+        </section>
+
+        <section class="section">
+            <h2 data-i18n="activities.title">Our Activities</h2>
+            <p data-i18n="activities.subtitle">We conduct over 1000 activities annually to educate, empower and create a resilient community.</p>
+        </section>
+
+        <section class="section">
+            <h2>Navigation Test</h2>
+            <ul class="nav-list">
+                <li><a href="#" data-i18n="nav.community-center">Community Center</a></li>
+                <li><a href="#" data-i18n="nav.calendar">Calendar</a></li>
+                <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+                <li><a href="#" data-i18n="nav.activities">Activities</a></li>
+                <li><a href="#" data-i18n="nav.gallery">Gallery</a></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2 data-i18n="about.title">About Vestigium</h2>
+            <p data-i18n="about.text1" data-i18n-html><strong>Vestigium (lat. footprint)</strong> was born in 2011 by the initiative of six women who listened to the needs of their neighbors in the Vrbana area, Zagreb.</p>
+            <p data-i18n="about.text2" data-i18n-html>As part of the <strong>Global Transition Movement for Sustainable Communities</strong>, we work to solve problems such as the growing distance between people.</p>
+        </section>
+    </main>
+
+    <div id="status" class="status">
+        <div id="status-content"></div>
+    </div>
+
+    <script>
+        // Show status messages
+        function showStatus(message, duration = 3000) {
+            const status = document.getElementById('status');
+            const content = document.getElementById('status-content');
+            
+            if (status && content) {
+                content.textContent = message;
+                status.classList.add('show');
+                
+                setTimeout(() => {
+                    status.classList.remove('show');
+                }, duration);
+            }
+        }
+
+        // Listen for language changes
+        document.addEventListener('languageChanged', function(e) {
+            const lang = e.detail.language === 'en' ? 'English' : 'Hrvatski';
+            showStatus(`🌐 Language changed to ${lang}`);
+        });
+
+        // Initial load notification
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                if (window.vestigiumLanguageSwitcher) {
+                    const currentLang = window.vestigiumLanguageSwitcher.getCurrentLanguage();
+                    const langName = currentLang === 'en' ? 'English' : 'Hrvatski';
+                    showStatus(`✅ Language system loaded - ${langName}`);
+                }
+            }, 500);
+        });
+    </script>
+
+    <script src="../../src/assets/js/language-switcher.js"></script>
+</body>
+</html>

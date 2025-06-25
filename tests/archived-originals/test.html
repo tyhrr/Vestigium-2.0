@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vestigium - Test Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .status {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+        
+        .status.success {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .status.error {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .btn {
+            background-color: #2E7D32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background-color: #1B5E20;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Vestigium 2.0 - Test Page</h1>
+        <p>Esta página permite probar las funcionalidades implementadas.</p>
+        
+        <h2>🌐 Sistema de Internacionalización</h2>
+        <div id="i18n-status" class="status">
+            <strong>Estado:</strong> <span id="i18n-message">Verificando...</span>
+        </div>
+        
+        <div>
+            <button class="btn" onclick="testLanguageSwitch('en')">🇬🇧 Switch to English</button>
+            <button class="btn" onclick="testLanguageSwitch('hr')">🇭🇷 Prebaci na Hrvatski</button>
+        </div>
+        
+        <h2>📋 Navegación Avanzada</h2>
+        <div id="nav-status" class="status">
+            <strong>Estado:</strong> <span id="nav-message">Verificando...</span>
+        </div>
+        
+        <h2>🔍 Elementos de Prueba</h2>
+        <div>
+            <p data-i18n="hero.title">Building Sustainable Communities</p>
+            <p data-i18n="nav.community-center">Community Center</p>
+            <p data-i18n="nav.get-engaged">Get engaged</p>
+            <p data-i18n="activities.title">Our Activities</p>
+        </div>
+        
+        <h2>📊 Información del Sistema</h2>
+        <div id="system-info">
+            <p><strong>Idioma actual:</strong> <span id="current-lang">-</span></p>
+            <p><strong>Navegador:</strong> <span id="browser-info">-</span></p>
+            <p><strong>Viewport:</strong> <span id="viewport-info">-</span></p>
+        </div>
+        
+        <h2>🔗 Enlaces de Navegación</h2>
+        <div>
+            <a href="index.html" class="btn">🏠 Volver a la Página Principal</a>
+        </div>
+    </div>
+    
+    <script>
+        // Test de funcionalidades
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSystemInfo();
+            testI18nSystem();
+            testNavigationSystem();
+        });
+        
+        function updateSystemInfo() {
+            document.getElementById('browser-info').textContent = navigator.userAgent.split(' ').slice(-2).join(' ');
+            document.getElementById('viewport-info').textContent = `${window.innerWidth}x${window.innerHeight}`;
+            
+            // Actualizar cada segundo
+            setInterval(() => {
+                document.getElementById('viewport-info').textContent = `${window.innerWidth}x${window.innerHeight}`;
+            }, 1000);
+        }
+        
+        function testI18nSystem() {
+            const statusEl = document.getElementById('i18n-status');
+            const messageEl = document.getElementById('i18n-message');
+            
+            if (typeof I18nManager !== 'undefined') {
+                statusEl.className = 'status success';
+                messageEl.textContent = '✅ Sistema i18n disponible';
+                
+                // Test de inicialización
+                try {
+                    const i18n = new I18nManager();
+                    i18n.init();
+                    document.getElementById('current-lang').textContent = i18n.getCurrentLanguage();
+                    window.testI18n = i18n;
+                } catch (error) {
+                    statusEl.className = 'status error';
+                    messageEl.textContent = '❌ Error inicializando i18n: ' + error.message;
+                }
+            } else {
+                statusEl.className = 'status error';
+                messageEl.textContent = '❌ Sistema i18n no encontrado';
+            }
+        }
+        
+        function testNavigationSystem() {
+            const statusEl = document.getElementById('nav-status');
+            const messageEl = document.getElementById('nav-message');
+            
+            if (typeof AdvancedNavigation !== 'undefined') {
+                statusEl.className = 'status success';
+                messageEl.textContent = '✅ Sistema de navegación avanzada disponible';
+            } else {
+                statusEl.className = 'status error';
+                messageEl.textContent = '❌ Sistema de navegación no encontrado';
+            }
+        }
+        
+        function testLanguageSwitch(lang) {
+            if (window.testI18n) {
+                window.testI18n.changeLanguage(lang);
+                document.getElementById('current-lang').textContent = lang;
+                console.log(`Idioma cambiado a: ${lang}`);
+            } else {
+                alert('Sistema i18n no disponible');
+            }
+        }
+        
+        // Log de eventos para debugging
+        console.log('🧪 Test page loaded');
+        console.log('Available modules:', {
+            I18nManager: typeof I18nManager !== 'undefined',
+            AdvancedNavigation: typeof AdvancedNavigation !== 'undefined'
+        });
+    </script>
+    
+    <!-- Incluir los scripts principales -->
+    <script src="/src/assets/js/i18n.js"></script>
+    <script src="/src/assets/js/main.js"></script>
+</body>
+</html>

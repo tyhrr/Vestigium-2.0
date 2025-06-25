@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Rápido Language Switcher</title>
+    <!-- TEST INFO: Rapid Test -->
+    <!-- Location: /tests/language-switcher/test-rapid.html -->
+    <!-- Purpose: Quick test with minimal setup and status logging -->
+    <!-- Debug: Check status log and browser console -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        
+        .test-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #fdcb6e;
+        }
+        
+        .header__container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem; 
+            background: #f0f0f0; 
+            margin-bottom: 2rem; 
+        }
+        .test-section { 
+            background: white; 
+            padding: 2rem; 
+            border: 1px solid #ddd; 
+            margin: 1rem 0; 
+        }
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        .language-selector__toggle {
+            background: #2E7D32;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .language-selector__menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-width: 120px;
+            display: none;
+            z-index: 1000;
+        }
+        .language-selector__menu--open {
+            display: block;
+        }
+        .language-selector__option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: left;
+        }
+        .language-selector__option:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h3>🧪 Rapid Test</h3>
+        <p><strong>Purpose:</strong> Quick test with minimal setup and status logging</p>
+        <p><strong>Location:</strong> /tests/language-switcher/test-rapid.html</p>
+        <p><strong>Debug:</strong> Check status log and browser console</p>
+    </div>
+
+    <h1>🧪 Test Rápido - Language Switcher</h1>
+    
+    <div class="header__container">
+        <div class="header__brand">
+            <h2>Vestigium Test</h2>
+        </div>
+        <!-- El selector se insertará aquí -->
+    </div>
+
+    <div class="test-section">
+        <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+        <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community.</p>
+        
+        <h3 data-i18n="activities.title">Our Activities</h3>
+        <p data-i18n="activities.subtitle">We conduct over 1000 activities annually to educate, empower and create a resilient community.</p>
+        
+        <h4>Navigation Test:</h4>
+        <ul>
+            <li><span data-i18n="nav.community-center">Community Center</span></li>
+            <li><span data-i18n="nav.calendar">Calendar</span></li>
+            <li><span data-i18n="nav.projects">Projects</span></li>
+            <li><span data-i18n="nav.activities">Activities</span></li>
+        </ul>
+    </div>
+
+    <div id="test-status" style="background: #e8f5e8; padding: 1rem; margin: 1rem 0; border-left: 4px solid #4caf50;">
+        <h3>Estado del Test:</h3>
+        <div id="status-log"></div>
+    </div>
+
+    <script>
+        let testLog = [];
+        
+        function logTest(message, isError = false) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            testLog.push(logEntry);
+            console.log(logEntry);
+            
+            const statusLog = document.getElementById('status-log');
+            if (statusLog) {
+                const color = isError ? '#f44336' : '#4caf50';
+                statusLog.innerHTML += `<p style="color: ${color}; margin: 0.25rem 0;">${logEntry}</p>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            logTest('✅ DOM cargado');
+            
+            // Contar elementos data-i18n
+            const i18nElements = document.querySelectorAll('[data-i18n]');
+            logTest(`📊 Elementos con data-i18n encontrados: ${i18nElements.length}`);
+            
+            // Verificar contenido inicial
+            i18nElements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const content = el.textContent.trim();
+                if (!content) {
+                    logTest(`⚠️ Elemento vacío: ${key}`, true);
+                } else {
+                    logTest(`📝 Elemento con contenido: ${key} = "${content}"`);
+                }
+            });
+        });
+
+        // Verificar carga de LanguageSwitcher
+        setTimeout(() => {
+            if (typeof LanguageSwitcher !== 'undefined') {
+                logTest('✅ Clase LanguageSwitcher cargada');
+                
+                if (window.vestigiumLanguageSwitcher) {
+                    logTest('✅ Instancia auto-creada');
+                    logTest(`🌐 Idioma actual: ${window.vestigiumLanguageSwitcher.getCurrentLanguage()}`);
+                    
+                    // Verificar si se tradujo
+                    setTimeout(() => {
+                        const firstElement = document.querySelector('[data-i18n="hero.title"]');
+                        if (firstElement) {
+                            logTest(`🔍 Contenido después de traducir: "${firstElement.textContent}"`);
+                        }
+                    }, 200);
+                } else {
+                    logTest('❌ Instancia NO creada automáticamente', true);
+                    
+                    // Crear manualmente
+                    try {
+                        window.vestigiumLanguageSwitcher = new LanguageSwitcher();
+                        window.vestigiumLanguageSwitcher.init();
+                        logTest('✅ Instancia creada manualmente');
+                    } catch (error) {
+                        logTest(`❌ Error creando instancia: ${error.message}`, true);
+                    }
+                }
+            } else {
+                logTest('❌ Clase LanguageSwitcher NO cargada', true);
+            }
+        }, 500);
+
+        // Escuchar cambios de idioma
+        document.addEventListener('languageChanged', function(e) {
+            logTest(`🔄 Idioma cambiado a: ${e.detail.language}`);
+        });
+    </script>
+    
+    <script src="../../src/assets/js/language-switcher.js"></script>
+</body>
+</html>

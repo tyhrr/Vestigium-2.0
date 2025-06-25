@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="meta.title">Vestigium - Ecological-Creative Association for Sustainable Communities</title>
+    <meta name="description" content="Vestigium is an association in Zagreb that improves community quality of life by promoting healthy and sustainable lifestyle through educational and ecological activities." data-i18n-attr="content:meta.description">
+      <!-- Canonical URL -->
+    <link rel="canonical" href="https://vestigium.hr/">
+      <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Vestigium - Ecological-Creative Association" data-i18n-attr="content:meta.title">
+    <meta property="og:description" content="Improving community quality of life in Zagreb through sustainable initiatives, ecological education and community support." data-i18n-attr="content:meta.description">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vestigium.hr/">
+    <meta property="og:image" content="src/assets/images/content/vestigium-community.jpg">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vestigium - Sustainable Communities" data-i18n-attr="content:meta.title">
+    <meta name="twitter:description" content="Ecological-creative association in Zagreb promoting sustainability and community life" data-i18n-attr="content:meta.description">
+      <!-- Favicon -->
+    <link rel="icon" href="src/assets/images/favicon/favicon-96x96.png">
+    <link rel="icon" href="src/assets/images/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="src/assets/images/favicon/apple-touch-icon.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2E7D32">
+      <!-- Preload Critical Resources -->
+    <link rel="preload" href="src/assets/css/main.css" as="style">
+    <link rel="preload" href="src/assets/js/main.js" as="script">
+      <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/assets/css/main.css">
+    <link rel="stylesheet" href="src/assets/css/navigation-advanced.css">
+</head>
+<body>
+    <!-- Estructura Semántica Principal -->
+    <header role="banner" class="header">
+        <div class="header__container">
+            <div class="header__brand" itemscope itemtype="https://schema.org/Organization">
+                <h1 class="header__logo" itemprop="name">
+                    <a href="/" aria-label="Vestigium - Ecological-Creative Association - Home">Vestigium</a>
+                    <img src="/src/assets/images/logo/logo-png.png" alt="logo-img">
+                </h1>
+            </div>
+            
+            <!-- Language Selector - will be inserted here by JavaScript -->
+            
+            <!-- Advanced Navigation -->
+            <nav role="navigation" class="navigation" aria-label="Main navigation">
+                <button class="navigation__toggle" aria-label="Open navigation menu" aria-expanded="false">
+                    <span class="navigation__hamburger"></span>
+                </button>
+                
+                <ul class="navigation__menu" role="menubar">
+                    <!-- Community Center with Dropdown -->
+                    <li class="navigation__item" role="none">                        <a href="#community-center" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.community-center">Community Center</a>
+                        <ul class="navigation__submenu" role="menu">
+                            <li class="navigation__item" role="none">
+                                <a href="#who-are-we" class="navigation__link" role="menuitem" data-i18n="nav.who-are-we">Who are we?</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#what-we-have-done" class="navigation__link" role="menuitem" data-i18n="nav.what-we-have-done">What we have done</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#join-us" class="navigation__link" role="menuitem" data-i18n="nav.join-us">Join us / Become a member</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Calendar -->
+                    <li class="navigation__item" role="none">
+                        <a href="#calendar" class="navigation__link" role="menuitem" data-i18n="nav.calendar">Calendar</a>
+                    </li>
+                    
+                    <!-- Zadruga Zelenica -->
+                    <li class="navigation__item" role="none">
+                        <a href="#zadruga-zelenica" class="navigation__link" role="menuitem" data-i18n="nav.zadruga-zelenica">Zadruga Zelenica</a>
+                    </li>
+                    
+                    <!-- Find us -->
+                    <li class="navigation__item" role="none">
+                        <a href="#find-us" class="navigation__link" role="menuitem" data-i18n="nav.find-us">Find us</a>
+                    </li>
+                    
+                    <!-- Get engaged with Dropdown -->
+                    <li class="navigation__item" role="none">
+                        <a href="#get-engaged" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.get-engaged">Get engaged</a>
+                        <ul class="navigation__submenu" role="menu">
+                            <li class="navigation__item" role="none">
+                                <a href="#be-volunteer" class="navigation__link" role="menuitem" data-i18n="nav.be-volunteer">Be a Volunteer</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#esc" class="navigation__link" role="menuitem" data-i18n="nav.esc">ESC (European Solidarity Corp)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Gallery -->
+                    <li class="navigation__item" role="none">
+                        <a href="#gallery" class="navigation__link" role="menuitem" data-i18n="nav.gallery">Gallery</a>
+                    </li>
+                    
+                    <!-- Projects with Complex Dropdown -->
+                    <li class="navigation__item" role="none">
+                        <a href="#projects" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.projects">Projects</a>
+                        <ul class="navigation__submenu" role="menu">                            <li class="navigation__item" role="none">
+                                <a href="#erasmus" class="navigation__link" role="menuitem" data-i18n="nav.erasmus">Erasmus</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#national" class="navigation__link" role="menuitem" data-i18n="nav.national">National</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#previous-projects" class="navigation__link" role="menuitem" data-i18n="nav.previous-projects">Previous projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Activities with Dropdown -->
+                    <li class="navigation__item" role="none">
+                        <a href="#activities" 
+                           class="navigation__link navigation__link--has-submenu" 
+                           role="menuitem" 
+                           aria-expanded="false"
+                           data-i18n="nav.activities">Activities</a>
+                        <ul class="navigation__submenu" role="menu">
+                            <li class="navigation__item" role="none">
+                                <a href="#frequent-activities" class="navigation__link" role="menuitem" data-i18n="nav.frequent-activities">Frequent activities</a>
+                            </li>
+                            <li class="navigation__item" role="none">
+                                <a href="#see-more" class="navigation__link" role="menuitem" data-i18n="nav.see-more">See more</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main role="main" class="main">        <!-- Hero Section -->
+        <section id="inicio" class="hero" aria-labelledby="hero-heading">
+            <div class="hero__container">
+                <h1 id="hero-heading" class="hero__title" data-i18n="hero.title">
+                    Building Sustainable Communities
+                </h1>
+                <p class="hero__subtitle" data-i18n="hero.subtitle">
+                    Vestigium is an ecological-creative association dedicated to improving the quality of life 
+                    of our community, promoting a healthy and sustainable lifestyle for our future.
+                </p>
+                <div class="hero__actions">
+                    <a href="#actividades" class="button button--primary" data-i18n="hero.btn-activities">Discover Activities</a>
+                    <a href="#involucrate" class="button button--secondary" data-i18n="hero.btn-join">Join Us</a>
+                </div>
+            </div>
+        </section>        <!-- Activities Section -->
+        <section id="actividades" class="services" aria-labelledby="services-heading">
+            <div class="services__container">
+                <h2 id="services-heading" class="services__title" data-i18n="activities.title">
+                    Our Activities
+                </h2>
+                <p class="services__description" data-i18n="activities.subtitle">
+                    We conduct over 1000 activities annually to educate, empower and create a resilient community.
+                </p>
+                
+                <div class="services__grid">
+                    <article class="service-card" itemscope itemtype="https://schema.org/Event">
+                        <div class="service-card__icon">
+                            <svg class="icon icon--education" aria-hidden="true">
+                                <use href="#icon-education"></use>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title" itemprop="name" data-i18n="activities.education.title">Education & Workshops</h3>
+                        <p class="service-card__description" itemprop="description" data-i18n="activities.education.description">
+                            Workshops on urban gardening, composting, social permaculture, healthy cooking, 
+                            sewing and relaxation for all ages.
+                        </p>
+                    </article>
+                    
+                    <article class="service-card" itemscope itemtype="https://schema.org/Event">
+                        <div class="service-card__icon">
+                            <svg class="icon icon--community" aria-hidden="true">
+                                <use href="#icon-community"></use>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title" itemprop="name" data-i18n="activities.community.title">Community Life</h3>
+                        <p class="service-card__description" itemprop="description" data-i18n="activities.community.description">
+                            Farmers market, free library, poetry evenings, storytelling, swap shops and family gatherings.
+                        </p>
+                    </article>
+                    
+                    <article class="service-card" itemscope itemtype="https://schema.org/Event">
+                        <div class="service-card__icon">
+                            <svg class="icon icon--sustainability" aria-hidden="true">
+                                <use href="#icon-sustainability"></use>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title" itemprop="name" data-i18n="activities.sustainability.title">Sustainability</h3>
+                        <p class="service-card__description" itemprop="description" data-i18n="activities.sustainability.description">
+                            Community Supported Agriculture, zero-waste events, repair cafés, 
+                            and promotion of small ethical local businesses.
+                        </p>
+                    </article>
+                    
+                    <article class="service-card" itemscope itemtype="https://schema.org/Event">
+                        <div class="service-card__icon">
+                            <svg class="icon icon-empowerment" aria-hidden="true">
+                                <use href="#icon-empowerment"></use>
+                            </svg>
+                        </div>
+                        <h3 class="service-card__title" itemprop="name" data-i18n="activities.empowerment.title">Empowerment</h3>
+                        <p class="service-card__description" itemprop="description" data-i18n="activities.empowerment.description">
+                            Women empowerment support, addiction prevention, sociocracy and Theatre of the Oppressed for social change.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>        <!-- Sección Nosotros -->
+        <section id="nosotros" class="about" aria-labelledby="about-heading">
+            <div class="about__container">
+                <div class="about__content" itemscope itemtype="https://schema.org/Organization">
+                    <h2 id="about-heading" class="about__title" data-i18n="about.title">
+                        About Vestigium
+                    </h2>                    <p class="about__text" data-i18n="about.text1" data-i18n-html>
+                        <strong>Vestigium (lat. footprint)</strong> was born in 2011 by the initiative of six women 
+                        who listened to the needs of their neighbors in the Vrbana area, Zagreb. We created a 
+                        multifunctional space where initiatives can develop and flourish.
+                    </p>
+                    <p class="about__text" data-i18n="about.text2" data-i18n-html>
+                        As part of the <strong>Global Transition Movement for Sustainable Communities</strong>, 
+                        we work to solve problems such as the growing distance between people, the lack 
+                        of meeting and socializing places, and the exclusion of families and elderly residents.
+                    </p>
+                    <p class="about__text" data-i18n="about.text3" data-i18n-html>
+                        Since 2017 we are beneficiaries of institutional support from the National Foundation for 
+                        Civil Society Development. In 2017 we were presented as an inspiring example 
+                        "Changemakers" from Croatia, and in 2018 nominated among the top 30 projects for the 
+                        "Social Marie Award" among 250 European socially innovative projects.
+                    </p>
+                </div>
+            </div>
+        </section>        <!-- Aside complementario -->
+        <aside role="complementary" class="cta" aria-labelledby="cta-heading">
+            <div class="cta__container">
+                <h2 id="cta-heading" class="cta__title" data-i18n="cta.title">
+                    Ready to be part of the change?
+                </h2>
+                <p class="cta__text" data-i18n="cta.text">
+                    Join our community of volunteers and members working together 
+                    to create a more sustainable and connected future.
+                </p>
+                <a href="#involucrate" class="button button--primary" data-i18n="cta.btn">Get Involved</a>
+            </div>
+        </aside>
+    </main>    <footer role="contentinfo" class="footer" itemscope itemtype="https://schema.org/Organization">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <h3 class="footer__title" itemprop="name" data-i18n="footer.title">Vestigium</h3>
+                    <p class="footer__description" itemprop="description" data-i18n="footer.description">
+                        Ecological-creative association improving community quality of life 
+                        through sustainable initiatives and education in Zagreb.
+                    </p>
+                    <div class="footer__achievements">
+                        <p class="footer__achievement" data-i18n="footer.achievement1">🏆 Changemakers Croatia 2017</p>
+                        <p class="footer__achievement" data-i18n="footer.achievement2">🌟 Social Marie Award Finalist 2018</p>
+                    </div>
+                </div>
+                
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <h4 class="footer__nav-title" data-i18n="footer.links">Links</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="#inicio" class="footer__nav-link" data-i18n="footer.home">Home</a></li>
+                        <li><a href="#actividades" class="footer__nav-link" data-i18n="footer.activities">Activities</a></li>
+                        <li><a href="#nosotros" class="footer__nav-link" data-i18n="footer.about">About us</a></li>
+                        <li><a href="#involucrate" class="footer__nav-link" data-i18n="footer.get-involved">Get involved</a></li>
+                        <li><a href="#contacto" class="footer__nav-link" data-i18n="footer.contact">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div id="involucrate" class="footer__involvement">
+                    <h4 class="footer__involvement-title" data-i18n="footer.involvement.title">Get Involved</h4>
+                    <p class="footer__involvement-text" data-i18n="footer.involvement.text">
+                        Join as a volunteer or member and help build a more resilient community.
+                    </p>
+                    <ul class="footer__involvement-list">
+                        <li data-i18n="footer.involvement.item1">Event volunteering</li>
+                        <li data-i18n="footer.involvement.item2">Workshops and education</li>
+                        <li data-i18n="footer.involvement.item3">Community agriculture</li>
+                        <li data-i18n="footer.involvement.item4">Organizational support</li>
+                    </ul>
+                </div>
+                
+                <div id="contacto" class="footer__contact" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
+                    <h4 class="footer__contact-title" data-i18n="footer.contact.title">Contact</h4>
+                    <div class="footer__contact-info" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <p><strong data-i18n="footer.location">Location:</strong></p>
+                        <p itemprop="addressLocality" data-i18n="footer.location.area">Vrbana Area, Zagreb</p>
+                        <p itemprop="addressCountry" data-i18n="footer.location.country">Croatia</p>
+                    </div>
+                    <p class="footer__contact-info">
+                        <span itemprop="email">info@vestigium.hr</span>
+                    </p>
+                    <p class="footer__contact-info">
+                        <strong data-i18n="footer.movement">Global Transition Movement</strong>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright" data-i18n="footer.copyright" data-i18n-html>
+                    &copy; 2025 Vestigium Association. All rights reserved.
+                </p>
+                <p class="footer__tech" data-i18n="footer.tech">
+                    Building sustainable communities since 2011 • Over 1000 annual activities
+                </p>
+            </div>
+        </div>
+    </footer>
+      <!-- Language Switcher Status Indicator (solo para desarrollo) -->
+    <div id="ls-status" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); color: white; padding: 10px 15px; border-radius: 8px; font-family: monospace; font-size: 12px; z-index: 10000; max-width: 250px; line-height: 1.4;">
+        <div style="font-weight: bold; margin-bottom: 5px;">🌐 Language Status</div>
+        <div>Estado: <span id="ls-status-state">Cargando...</span></div>
+        <div>Idioma: <span id="ls-status-lang">-</span></div>
+        <div>HTML: <span id="ls-status-html">-</span></div>
+        <div style="margin-top: 8px; font-size: 10px; opacity: 0.8;">
+            Click para debug completo
+        </div>
+    </div>
+
+    <!-- SVG Icons Sprite -->
+    <svg style="display: none;" aria-hidden="true">
+        <defs>
+            <symbol id="icon-education" viewBox="0 0 24 24">
+                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+            </symbol>            <symbol id="icon-community" viewBox="0 0 24 24">
+                <!-- Simple house outline -->
+                <path d="M12 3L4 9v12h5v-7h6v7h5V9l-8-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </symbol><symbol id="icon-sustainability" viewBox="0 0 24 24">
+                <!-- Flecha 1: arriba derecha, curva hacia abajo izquierda -->
+                <path d="M12 3 C16.5 3 20 6.5 20 11 C20 12.5 19.5 13.5 18.8 14.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="18.8,14.5 17,12.5 15.5,14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                
+                <!-- Flecha 2: abajo izquierda, curva hacia arriba derecha -->
+                <path d="M12 21 C7.5 21 4 17.5 4 13 C4 11.5 4.5 10.5 5.2 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="5.2,9.5 7,11.5 8.5,10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>            <symbol id="icon-empowerment" viewBox="0 0 24 24">
+                <!-- Star outline -->
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </symbol>
+        </defs>
+    </svg>    <!-- Scripts al final del body -->
+    <script src="src/assets/js/language-switcher.js"></script>
+    <script src="src/assets/js/main.js"></script>
+    
+    <!-- Script de monitoreo del Language Switcher (solo para desarrollo) -->
+    <script>
+        (function() {
+            const statusEl = document.getElementById('ls-status');
+            const stateEl = document.getElementById('ls-status-state');
+            const langEl = document.getElementById('ls-status-lang');
+            const htmlEl = document.getElementById('ls-status-html');
+            
+            function updateStatus() {
+                if (window.vestigiumLanguageSwitcher) {
+                    const ls = window.vestigiumLanguageSwitcher;
+                    const currentLang = ls.getCurrentLanguage();
+                    const config = ls.getLanguageConfig();
+                    const langName = config.languages[currentLang]?.name || currentLang;
+                    
+                    stateEl.textContent = ls.isInitialized ? '✅ Activo' : '⚠️ No Init';
+                    langEl.textContent = `${langName} (${currentLang})`;
+                    htmlEl.textContent = document.documentElement.lang;
+                    
+                    // Cambiar color según estado
+                    if (ls.isInitialized) {
+                        statusEl.style.background = 'rgba(76, 175, 80, 0.9)';
+                    } else {
+                        statusEl.style.background = 'rgba(255, 152, 0, 0.9)';
+                    }
+                } else {
+                    stateEl.textContent = '❌ No Cargado';
+                    langEl.textContent = 'N/A';
+                    htmlEl.textContent = document.documentElement.lang;
+                    statusEl.style.background = 'rgba(244, 67, 54, 0.9)';
+                }
+            }
+            
+            // Actualizar cada 2 segundos
+            setInterval(updateStatus, 2000);
+            
+            // Actualizar cuando el DOM esté listo
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    setTimeout(updateStatus, 500);
+                });
+            } else {
+                setTimeout(updateStatus, 500);
+            }
+            
+            // Actualizar cuando cambie el idioma
+            document.addEventListener('languageChanged', updateStatus);
+            
+            // Click en el status para mostrar debug completo
+            statusEl.addEventListener('click', function() {
+                if (window.vestigiumLanguageSwitcher) {
+                    console.log('🔍 DEBUG COMPLETO DEL LANGUAGE SWITCHER:');
+                    console.log('='.repeat(50));
+                    const ls = window.vestigiumLanguageSwitcher;
+                    console.log('Current Language:', ls.getCurrentLanguage());
+                    console.log('Is Initialized:', ls.isInitialized);
+                    console.log('Animation in Progress:', ls.animationInProgress);
+                    console.log('Available Languages:', Object.keys(ls.getLanguageConfig().languages));
+                    console.log('Available Translations:', Object.keys(ls.translations));
+                    console.log('HTML Lang Attribute:', document.documentElement.lang);
+                    console.log('LocalStorage:', localStorage.getItem('vestigium-language'));
+                    console.log('Selector in DOM:', !!document.querySelector('.language-selector'));
+                    console.log('Elements with data-i18n:', document.querySelectorAll('[data-i18n]').length);
+                    console.log('Sample translation (hero.title):', ls.t('hero.title'));
+                    console.log('='.repeat(50));
+                    
+                    // Test functions
+                    window.testEN = () => ls.changeLanguageSmooth('en');
+                    window.testHR = () => ls.changeLanguageSmooth('hr');
+                    console.log('💡 Test functions: testEN(), testHR()');
+                } else {
+                    console.error('❌ Language Switcher no disponible');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

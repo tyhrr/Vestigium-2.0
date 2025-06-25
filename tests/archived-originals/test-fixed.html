@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Language Switcher - Fixed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f0f0f0;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        
+        .content {
+            background: white;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .test-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(46, 125, 50, 0.9);
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            max-width: 300px;
+            display: none;
+        }
+        
+        .test-status.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Language Selector Styles */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-selector__toggle {
+            background: #2E7D32;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .language-selector__toggle:hover {
+            background: #1B5E20;
+            transform: translateY(-1px);
+        }
+        
+        .language-selector__flag {
+            font-size: 1.1rem;
+        }
+        
+        .language-selector__icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+        
+        .language-selector__toggle[aria-expanded="true"] .language-selector__icon {
+            transform: rotate(180deg);
+        }
+        
+        .language-selector__menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 140px;
+            display: none;
+            z-index: 1000;
+            margin-top: 0.25rem;
+        }
+        
+        .language-selector__menu--open {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .language-selector__option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+        
+        .language-selector__option:hover {
+            background: #f5f5f5;
+        }
+        
+        .debug-info {
+            background: #e3f2fd;
+            padding: 1rem;
+            border-left: 4px solid #2196f3;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Test Language Switcher - Corrección de Eventos</h1>
+    
+    <div class="header__container">
+        <div class="header__brand">
+            <h2>Vestigium Test</h2>
+        </div>
+        <!-- Language selector will be inserted here -->
+    </div>
+
+    <div class="content">
+        <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+        <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community.</p>
+        
+        <h3 data-i18n="activities.title">Our Activities</h3>
+        <p data-i18n="activities.subtitle">We conduct over 1000 activities annually to educate, empower and create a resilient community.</p>
+        
+        <h4>Navigation Test:</h4>
+        <ul>
+            <li><span data-i18n="nav.community-center">Community Center</span></li>
+            <li><span data-i18n="nav.calendar">Calendar</span></li>
+            <li><span data-i18n="nav.projects">Projects</span></li>
+            <li><span data-i18n="nav.activities">Activities</span></li>
+        </ul>
+    </div>
+
+    <div class="debug-info">
+        <h3>🔍 Debug Information:</h3>
+        <div id="debug-log"></div>
+    </div>
+
+    <div id="test-status" class="test-status">
+        <div id="status-content"></div>
+    </div>
+
+    <script>
+        let debugLog = [];
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            debugLog.push(logEntry);
+            
+            const debugElement = document.getElementById('debug-log');
+            if (debugElement) {
+                const color = type === 'error' ? '#f44336' : type === 'warn' ? '#ff9800' : '#4caf50';
+                debugElement.innerHTML += `<div style="color: ${color}; margin: 0.25rem 0;">${logEntry}</div>`;
+            }
+            
+            console.log(logEntry);
+        }
+
+        function showStatus(message, duration = 3000) {
+            const status = document.getElementById('test-status');
+            const content = document.getElementById('status-content');
+            
+            if (status && content) {
+                content.textContent = message;
+                status.classList.add('show');
+                
+                setTimeout(() => {
+                    status.classList.remove('show');
+                }, duration);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            log('✅ DOM loaded');
+            
+            const i18nElements = document.querySelectorAll('[data-i18n]');
+            log(`📊 Elementos con data-i18n: ${i18nElements.length}`);
+        });
+
+        // Verificar carga de LanguageSwitcher
+        setTimeout(() => {
+            if (typeof LanguageSwitcher !== 'undefined') {
+                log('✅ Clase LanguageSwitcher cargada');
+                
+                if (window.vestigiumLanguageSwitcher) {
+                    log('✅ Instancia auto-creada');
+                    log(`🌐 Idioma inicial: ${window.vestigiumLanguageSwitcher.getCurrentLanguage()}`);
+                } else {
+                    log('❌ Instancia NO creada automáticamente', 'error');
+                }
+            } else {
+                log('❌ Clase LanguageSwitcher NO cargada', 'error');
+            }
+        }, 1000);
+
+        // Escuchar cambios de idioma
+        document.addEventListener('languageChanged', function(e) {
+            const lang = e.detail.language === 'en' ? 'English' : 'Hrvatski';
+            log(`🔄 Idioma cambiado exitosamente a: ${lang}`);
+            showStatus(`🌐 Language changed to ${lang}`);
+        });
+
+        // Test manual de cambio de idioma
+        setTimeout(() => {
+            const testButton = document.createElement('button');
+            testButton.textContent = '🧪 Test Manual Change to Croatian';
+            testButton.style.cssText = 'margin: 1rem 0; padding: 0.5rem 1rem; background: #ff9800; color: white; border: none; border-radius: 4px; cursor: pointer;';
+            testButton.onclick = () => {
+                if (window.vestigiumLanguageSwitcher) {
+                    log('🧪 Ejecutando test manual de cambio a croata');
+                    window.vestigiumLanguageSwitcher.changeLanguageSmooth('hr');
+                } else {
+                    log('❌ No hay instancia disponible para test', 'error');
+                }
+            };
+            
+            document.querySelector('.content').appendChild(testButton);
+        }, 1500);
+    </script>
+    
+    <script src="/src/assets/js/language-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Language Switcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f0f0f0;
+            margin-bottom: 2rem;
+        }
+        .test-content {
+            background: white;
+            padding: 2rem;
+            border: 1px solid #ddd;
+            margin-bottom: 1rem;
+        }
+        .debug-info {
+            background: #e8f5e8;
+            padding: 1rem;
+            border-left: 4px solid #4caf50;
+            margin: 1rem 0;
+        }
+        .error-info {
+            background: #ffe8e8;
+            padding: 1rem;
+            border-left: 4px solid #f44336;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Debug Language Switcher</h1>
+    
+    <div class="header__container">
+        <div class="header__brand">
+            <h2>Vestigium</h2>
+        </div>
+        <!-- Language Selector será insertado aquí -->
+    </div>
+
+    <div class="test-content">
+        <h2 data-i18n="hero.title">Building Sustainable Communities</h2>
+        <p data-i18n="hero.subtitle">Vestigium is an ecological-creative association dedicated to improving the quality of life of our community, promoting a healthy and sustainable lifestyle for our future.</p>
+        
+        <h3 data-i18n="activities.title">Our Activities</h3>
+        <p data-i18n="activities.subtitle">We conduct over 1000 activities annually to educate, empower and create a resilient community.</p>
+        
+        <ul>
+            <li><a href="#" data-i18n="nav.community-center">Community Center</a></li>
+            <li><a href="#" data-i18n="nav.calendar">Calendar</a></li>
+            <li><a href="#" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="#" data-i18n="nav.activities">Activities</a></li>
+        </ul>
+    </div>
+
+    <div id="debug-output" class="debug-info">
+        <h3>🔍 Debug Information</h3>
+        <div id="debug-log"></div>
+    </div>
+
+    <script>
+        // Debug logging
+        function debugLog(message) {
+            console.log(message);
+            const debugElement = document.getElementById('debug-log');
+            if (debugElement) {
+                debugElement.innerHTML += '<p>' + new Date().toLocaleTimeString() + ': ' + message + '</p>';
+            }
+        }
+
+        // Verificar si el LanguageSwitcher se carga
+        document.addEventListener('DOMContentLoaded', function() {
+            debugLog('DOM loaded');
+            
+            setTimeout(() => {
+                if (typeof LanguageSwitcher !== 'undefined') {
+                    debugLog('✅ LanguageSwitcher class disponible');
+                    
+                    if (window.vestigiumLanguageSwitcher) {
+                        debugLog('✅ Instance de LanguageSwitcher creada');
+                        debugLog('Idioma actual: ' + window.vestigiumLanguageSwitcher.getCurrentLanguage());
+                    } else {
+                        debugLog('❌ Instance de LanguageSwitcher NO creada');
+                    }
+                } else {
+                    debugLog('❌ LanguageSwitcher class NO disponible');
+                }
+
+                // Contar elementos con data-i18n
+                const i18nElements = document.querySelectorAll('[data-i18n]');
+                debugLog(`Elementos con data-i18n: ${i18nElements.length}`);
+                
+                // Verificar si tienen contenido
+                let emptyElements = 0;
+                i18nElements.forEach(el => {
+                    if (!el.textContent.trim()) {
+                        emptyElements++;
+                        debugLog(`❌ Elemento vacío: ${el.getAttribute('data-i18n')}`);
+                    }
+                });
+                
+                if (emptyElements === 0) {
+                    debugLog('✅ Todos los elementos tienen contenido');
+                } else {
+                    debugLog(`❌ ${emptyElements} elementos sin contenido`);
+                }
+            }, 100);
+        });
+
+        // Escuchar eventos de cambio de idioma
+        document.addEventListener('languageChanged', function(e) {
+            debugLog('🌐 Idioma cambiado a: ' + e.detail.language);
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script src="/src/assets/js/language-switcher.js"></script>
+</body>
+</html>
