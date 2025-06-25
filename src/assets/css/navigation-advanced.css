@@ -299,6 +299,10 @@
   z-index: 1000;
   max-height: 0;
   overflow: hidden;
+  
+  /* Mejores defaults para responsive */
+  box-sizing: border-box;
+  will-change: transform, opacity, max-height;
 }
 
 .navigation__menu[aria-expanded="true"] {
@@ -386,6 +390,7 @@
    MOBILE NAVIGATION ADAPTATIONS
    ============================================================================= */
 
+/* Móvil y tablets en modo retrato */
 @media (max-width: 767px) {
   .language-selector {
     order: -1;
@@ -398,24 +403,29 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
+    padding: var(--space-sm) var(--space-md);
   }
 
   .navigation__toggle {
     display: flex;
     order: 2;
   }
+
   .navigation__menu {
-    position: absolute;
+    position: fixed;
     top: 100%;
     left: 0;
     right: 0;
-    width: 100%;
+    width: 100vw;
     min-width: auto;
     margin-top: 0;
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    box-shadow: var(--shadow-xl);
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     max-height: calc(100vh - 80px);
     overflow-y: auto;
+    z-index: 999;
   }
 
   .navigation__menu[aria-expanded="true"] {
@@ -426,26 +436,92 @@
     border-bottom: 1px solid var(--border-color);
   }
 
+  .navigation__item:last-child {
+    border-bottom: none;
+  }
+
   .navigation__link {
     padding: var(--space-lg) var(--space-xl);
     font-size: var(--font-size-base);
+    justify-content: flex-start;
   }
 
   .navigation__submenu .navigation__link {
-    padding-left: calc(var(--space-lg) + var(--space-lg));
+    padding-left: calc(var(--space-xl) + var(--space-lg));
     background-color: var(--light-gray);
+    font-size: var(--font-size-sm);
   }
 }
 
 /* =============================================================================
-   DESKTOP NAVIGATION
+   TABLET NAVIGATION (Landscape mode)
    ============================================================================= */
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .header__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: var(--space-sm) var(--space-lg);
+  }
+
+  .navigation__toggle {
+    display: flex;
+    order: 2;
+  }
+
+  .navigation__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+    width: auto;
+    min-width: 340px;
+    max-width: 50vw;
+    margin-top: var(--space-xs);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-xl);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .navigation__menu[aria-expanded="true"] {
+    max-height: calc(100vh - 100px);
+  }
+
+  .navigation__item {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .navigation__item:last-child {
+    border-bottom: none;
+  }
+
+  .navigation__link {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--font-size-sm);
+    justify-content: space-between;
+  }
+
+  .navigation__submenu .navigation__link {
+    padding-left: calc(var(--space-lg) + var(--space-md));
+    background-color: var(--light-gray);
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* =============================================================================
+   DESKTOP NAVIGATION (Large screens only)
+   ============================================================================= */
+
+@media (min-width: 1024px) {
+  .header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) var(--space-lg);
   }
 
   .navigation__toggle {
@@ -463,6 +539,8 @@
     transform: none;
     margin: 0;
     min-width: auto;
+    max-height: none;
+    overflow: visible;
   }
 
   .navigation__item {
@@ -474,6 +552,7 @@
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius-sm);
     white-space: nowrap;
+    justify-content: center;
   }
 
   .navigation__link:hover,
@@ -511,6 +590,7 @@
   .navigation__submenu .navigation__link {
     padding: var(--space-md) var(--space-lg);
     border-bottom: 1px solid var(--border-color);
+    justify-content: flex-start;
   }
 
   .navigation__submenu .navigation__item:last-child .navigation__link {
@@ -549,16 +629,18 @@
 }
 
 /* =============================================================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE BREAKPOINTS - OPTIMIZACIONES ADICIONALES
    ============================================================================= */
 
+/* Tablets específicamente */
 @media (min-width: 768px) and (max-width: 1023px) {
-  /* Tablets */
-  .navigation__menu {
-    min-width: 340px;
+  .language-selector {
+    order: 1;
+    margin-right: var(--space-md);
   }
 }
 
+/* Desktop grande */
 @media (min-width: 1024px) {
   .navigation__menu {
     gap: var(--space-sm);
@@ -567,16 +649,34 @@
   .navigation__submenu {
     min-width: 280px;
   }
-  
-  /* Menú principal más ancho en pantallas grandes */
-  .navigation__menu {
-    min-width: 360px;
-  }
 }
 
+/* Pantallas muy grandes */
 @media (min-width: 1280px) {
   .navigation__menu {
     gap: var(--space-md);
+  }
+  
+  .header__container {
+    padding: var(--space-md) var(--space-xl);
+  }
+}
+
+/* Optimización para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .navigation__link {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--font-size-sm);
+  }
+  
+  .navigation__submenu .navigation__link {
+    padding-left: calc(var(--space-lg) + var(--space-md));
+    font-size: var(--font-size-xs);
+  }
+  
+  .language-selector__toggle {
+    min-height: 32px;
+    padding: var(--space-xs);
   }
 }
 
