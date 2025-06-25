@@ -861,3 +861,81 @@ p {
     --container-padding: var(--space-lg);
   }
 }
+
+/* =============================================================================
+   VISITOR COUNTER
+   Contador de visitas para el footer
+   ============================================================================= */
+
+.visitor-counter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background-color: rgba(46, 125, 50, 0.05);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--primary-green);
+}
+
+.visitor-counter__icon {
+  font-size: var(--font-size-base);
+  color: var(--primary-green);
+}
+
+.visitor-counter__label {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.visitor-counter__count {
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-green);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-base);
+  min-width: 3ch;
+  text-align: center;
+}
+
+.visitor-counter__suffix {
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+/* Animación del contador */
+@keyframes counterPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.visitor-counter__count--animating {
+  animation: counterPulse 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .visitor-counter {
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs) var(--space-sm);
+    gap: var(--space-xs);
+  }
+  
+  .visitor-counter__count {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visitor-counter {
+    justify-content: center;
+  }
+}

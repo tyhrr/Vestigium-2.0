@@ -130,7 +130,6 @@ const TRANSLATIONS = {
       activities: 'Activities',
       about: 'About us',
       news: 'News',
-      contact: 'Contact',
       'get-involved': 'Get involved',
       involvement: {
         title: 'Get Involved',
@@ -139,18 +138,20 @@ const TRANSLATIONS = {
         item2: 'Workshops and education',
         item3: 'Community agriculture',
         item4: 'Organizational support'
-      },
-      contact: {
+      },      contact: {
         title: 'Contact'
       },
-      location: 'Location:',
       location: {
+        label: 'Location:',
         area: 'Vrbana Area, Zagreb',
         country: 'Croatia'
-      },
-      movement: 'Global Transition Movement',
+      },      movement: 'Global Transition Movement',
       copyright: '&copy; 2025 Vestigium Association. All rights reserved.',
-      tech: 'Building sustainable communities since 2011 • Over 1000 annual activities'
+      tech: 'Building sustainable communities since 2011 • Over 1000 annual activities',
+      visitors: {
+        label: 'Visitors:',
+        count: 'visits'
+      }
     },
       // Language Switcher
     lang: {
@@ -275,7 +276,6 @@ const TRANSLATIONS = {
       activities: 'Aktivnosti',
       about: 'O nama',
       news: 'Vijesti',
-      contact: 'Kontakt',
       'get-involved': 'Uključite se',
       involvement: {
         title: 'Uključite Se',
@@ -284,18 +284,20 @@ const TRANSLATIONS = {
         item2: 'Radionice i edukacija',
         item3: 'Poljoprivreda zajednice',
         item4: 'Organizacijska podrška'
-      },
-      contact: {
+      },      contact: {
         title: 'Kontakt'
       },
-      location: 'Lokacija:',
       location: {
+        label: 'Lokacija:',
         area: 'Područje Vrbane, Zagreb',
         country: 'Hrvatska'
-      },
-      movement: 'Globalni Tranzicijski Pokret',
+      },      movement: 'Globalni Tranzicijski Pokret',
       copyright: '&copy; 2025 Udruga Vestigium. Sva prava pridržana.',
-      tech: 'Izgradnja održivih zajednica od 2011. • Preko 1000 godišnjih aktivnosti'
+      tech: 'Izgradnja održivih zajednica od 2011. • Preko 1000 godišnjih aktivnosti',
+      visitors: {
+        label: 'Posjetitelji:',
+        count: 'posjeta'
+      }
     },
       // Language Switcher
     lang: {

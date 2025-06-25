@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>    <!-- SEO Meta Tags -->
+<head>    
+    <!-- SEO Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="meta.title">Vestigium - Ecological-Creative Association for Sustainable Communities</title>
     <meta name="description" content="Vestigium is an association in Zagreb that improves community quality of life by promoting healthy and sustainable lifestyle through educational and ecological activities." data-i18n-attr="content:meta.description">
       <!-- Canonical URL -->
-    <link rel="canonical" href="https://vestigium.hr/">
+    <link rel="canonical" href=""> <!-- AUN POR DEFINIRSE -->
       <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Vestigium - Ecological-Creative Association" data-i18n-attr="content:meta.title">
     <meta property="og:description" content="Improving community quality of life in Zagreb through sustainable initiatives, ecological education and community support." data-i18n-attr="content:meta.description">
@@ -19,33 +20,36 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vestigium - Sustainable Communities" data-i18n-attr="content:meta.title">
     <meta name="twitter:description" content="Ecological-creative association in Zagreb promoting sustainability and community life" data-i18n-attr="content:meta.description">
-      <!-- Favicon -->
+    
+    <!-- Favicon -->
     <link rel="icon" href="src/assets/images/favicon/favicon-96x96.png">
     <link rel="icon" href="src/assets/images/favicon/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="src/assets/images/favicon/apple-touch-icon.png">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2E7D32">
-      <!-- Preload Critical Resources -->
+    <meta name="theme-color" content="#2E7D32">      <!-- Preload Critical Resources -->
     <link rel="preload" href="src/assets/css/main.css" as="style">
     <link rel="preload" href="src/assets/js/main.js" as="script">
+    <link rel="preload" href="src/assets/js/visitor-counter.js" as="script">
       <!-- Stylesheets -->
     <link rel="stylesheet" href="src/assets/css/main.css">
     <link rel="stylesheet" href="src/assets/css/navigation-advanced.css">
 </head>
 <body>
-    <!-- Estructura Semántica Principal -->
-    <header role="banner" class="header">
+    <!-- Estructura Semántica Principal -->    <header role="banner" class="header">
         <div class="header__container">
-            <div class="header__brand" itemscope itemtype="https://schema.org/Organization">
-                <h1 class="header__logo" itemprop="name">
-                    <a href="/" aria-label="Vestigium - Ecological-Creative Association - Home">Vestigium</a>
-                    <img src="/src/assets/images/logo/logo-png.png" alt="logo-img">
-                </h1>
+            <!-- Primera fila para tablet (770px-1024px) -->
+            <div class="header__top-row">
+                <div class="header__brand" itemscope itemtype="https://schema.org/Organization">
+                    <h1 class="header__logo" itemprop="name">
+                        <a href="/" aria-label="Vestigium - Ecological-Creative Association - Home">Vestigium</a>
+                        <img src="/src/assets/images/logo/logo-png.png" alt="logo-img">
+                    </h1>
+                </div>
+                
+                <!-- Language Selector - will be inserted here by JavaScript -->
             </div>
-            
-            <!-- Language Selector - will be inserted here by JavaScript -->
             
             <!-- Advanced Navigation -->
             <nav role="navigation" class="navigation" aria-label="Main navigation">
@@ -285,7 +289,7 @@
                         <li><a href="#actividades" class="footer__nav-link" data-i18n="footer.activities">Activities</a></li>
                         <li><a href="#nosotros" class="footer__nav-link" data-i18n="footer.about">About us</a></li>
                         <li><a href="#involucrate" class="footer__nav-link" data-i18n="footer.get-involved">Get involved</a></li>
-                        <li><a href="#contacto" class="footer__nav-link" data-i18n="footer.contact">Contact</a></li>
+                        <li><a href="#contacto" class="footer__nav-link" data-i18n="footer.contact.title">Contact</a></li>
                     </ul>
                 </nav>
                 
@@ -305,7 +309,7 @@
                 <div id="contacto" class="footer__contact" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
                     <h4 class="footer__contact-title" data-i18n="footer.contact.title">Contact</h4>
                     <div class="footer__contact-info" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                        <p><strong data-i18n="footer.location">Location:</strong></p>
+                        <p><strong data-i18n="footer.location.label">Location:</strong></p>
                         <p itemprop="addressLocality" data-i18n="footer.location.area">Vrbana Area, Zagreb</p>
                         <p itemprop="addressCountry" data-i18n="footer.location.country">Croatia</p>
                     </div>
@@ -321,10 +325,17 @@
             <div class="footer__bottom">
                 <p class="footer__copyright" data-i18n="footer.copyright" data-i18n-html>
                     &copy; 2025 Vestigium Association. All rights reserved.
-                </p>
-                <p class="footer__tech" data-i18n="footer.tech">
+                </p>                <p class="footer__tech" data-i18n="footer.tech">
                     Building sustainable communities since 2011 • Over 1000 annual activities
                 </p>
+                
+                <!-- Contador de Visitas -->
+                <div class="visitor-counter">
+                    <span class="visitor-counter__icon">👥</span>
+                    <span class="visitor-counter__label" data-i18n="footer.visitors.label">Visitors:</span>
+                    <span class="visitor-counter__count">0</span>
+                    <span class="visitor-counter__suffix" data-i18n="footer.visitors.count">visits</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -362,6 +373,7 @@
         </defs>
     </svg>    <!-- Scripts al final del body -->
     <script src="src/assets/js/language-switcher.js"></script>
+    <script src="src/assets/js/visitor-counter.js"></script>
     <script src="src/assets/js/main.js"></script>
     
     <!-- Script de monitoreo del Language Switcher (solo para desarrollo) -->

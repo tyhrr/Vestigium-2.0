@@ -31,10 +31,10 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="../../manifest.json">
     <meta name="theme-color" content="#2E7D32">
-    
-    <!-- Preload Critical Resources -->
+      <!-- Preload Critical Resources -->
     <link rel="preload" href="../assets/css/main.css" as="style">
     <link rel="preload" href="../assets/js/main.js" as="script">
+    <link rel="preload" href="../assets/js/visitor-counter.js" as="script">
     
     <!-- Swiper CSS for carousel -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -426,17 +426,19 @@
     <!-- Skip Link for Accessibility -->
     <a href="#main-content" class="skip-link" data-i18n="skip-link">Skip to main content</a>
     
-    <!-- Header -->
-    <header role="banner" class="header">
+    <!-- Header -->    <header role="banner" class="header">
         <div class="header__container">
-            <div class="header__brand" itemscope itemtype="https://schema.org/Organization">
-                <h1 class="header__logo" itemprop="name">
-                    <a href="../../index.html" aria-label="Vestigium - Ecological-Creative Association - Home">Vestigium</a>
-                    <img src="../assets/images/logo/logo-png.png" alt="Vestigium logo">
-                </h1>
+            <!-- Primera fila para tablet (770px-1024px) -->
+            <div class="header__top-row">
+                <div class="header__brand" itemscope itemtype="https://schema.org/Organization">
+                    <h1 class="header__logo" itemprop="name">
+                        <a href="../../index.html" aria-label="Vestigium - Ecological-Creative Association - Home">Vestigium</a>
+                        <img src="../assets/images/logo/logo-png.png" alt="Vestigium logo">
+                    </h1>
+                </div>
+                
+                <!-- Language Selector - will be inserted here by JavaScript -->
             </div>
-            
-            <!-- Language Selector - will be inserted here by JavaScript -->
             
             <!-- Navigation -->
             <nav role="navigation" class="navigation" aria-label="Main navigation">
@@ -682,7 +684,7 @@
                 <div class="footer__contact" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
                     <h4 class="footer__contact-title" data-i18n="footer.contact.title">Contact</h4>
                     <div class="footer__contact-info" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                        <p><strong data-i18n="footer.location">Location:</strong></p>
+                        <p><strong data-i18n="footer.location.label">Location:</strong></p>
                         <p itemprop="addressLocality" data-i18n="footer.location.area">Vrbana Area, Zagreb</p>
                         <p itemprop="addressCountry" data-i18n="footer.location.country">Croatia</p>
                     </div>
@@ -698,19 +700,26 @@
             <div class="footer__bottom">
                 <p class="footer__copyright" data-i18n="footer.copyright" data-i18n-html>
                     &copy; 2025 Vestigium Association. All rights reserved.
-                </p>
-                <p class="footer__tech" data-i18n="footer.tech">
+                </p>                <p class="footer__tech" data-i18n="footer.tech">
                     Building sustainable communities since 2011 • Over 1000 annual activities
                 </p>
+                
+                <!-- Contador de Visitas -->
+                <div class="visitor-counter">
+                    <span class="visitor-counter__icon">👥</span>
+                    <span class="visitor-counter__label" data-i18n="footer.visitors.label">Visitors:</span>
+                    <span class="visitor-counter__count">0</span>
+                    <span class="visitor-counter__suffix" data-i18n="footer.visitors.count">visits</span>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
-    <!-- Scripts -->
+      <!-- Scripts -->
     <script src="../assets/js/language-switcher.js"></script>
+    <script src="../assets/js/visitor-counter.js"></script>
     <script src="../assets/js/main.js"></script>
     
     <!-- Facebook Feed JavaScript -->

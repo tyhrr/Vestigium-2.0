@@ -208,6 +208,16 @@
   position: relative;
 }
 
+.header__container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.header__top-row {
+  display: contents; /* Por defecto no afecta el layout */
+}
+
 /* =============================================================================
    NAVIGATION TOGGLE (HAMBURGER BUTTON)
    ============================================================================= */
@@ -507,8 +517,143 @@
 
   .navigation__submenu .navigation__link {
     padding-left: calc(var(--space-lg) + var(--space-md));
-    background-color: var(--light-gray);
+    background-color: none;
     font-size: var(--font-size-xs);
+  }
+}
+
+/* =============================================================================
+   TWO-ROW NAVIGATION (770px - 1024px)
+   ============================================================================= */
+
+@media (min-width: 770px) and (max-width: 1023px) {
+  .header__container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-sm) var(--space-lg);
+    gap: var(--space-sm);
+  }
+
+  /* Primera fila: Logo y Language Selector */
+  .header__top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .header__brand {
+    flex-shrink: 0;
+  }
+
+  .language-selector {
+    order: 3;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  /* Ocultar toggle hamburguesa */
+  .navigation__toggle {
+    display: none;
+  }
+
+  /* Segunda fila: Navegación completa */
+  .navigation {
+    order: 4;
+    width: 100%;
+  }
+
+  .navigation__menu {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-gap: var(--space-xs);
+    background: none;
+    border: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    margin: 0;
+    min-width: auto;
+    max-height: none;
+    overflow: visible;
+    justify-content: center;
+    padding: var(--space-sm) 0;
+  }
+
+  .navigation__item {
+    border: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .navigation__link {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+    justify-content: center;
+    min-width: 120px;
+    text-align: center;
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+  }
+
+  .navigation__link:hover,
+  .navigation__link:focus {
+    background-color: var(--light-gray);
+    border-color: var(--primary-green);
+  }
+
+  /* Submenús en tablet */
+  .navigation__submenu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    min-width: 200px;
+    max-height: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-8px);
+    transition: all var(--transition-normal);
+    z-index: 900;
+    margin-top: var(--space-xs);
+  }
+
+  .navigation__item:hover .navigation__submenu,
+  .navigation__item:focus-within .navigation__submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    max-height: 300px;
+  }
+
+  .navigation__submenu .navigation__link {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-color);
+    justify-content: flex-start;
+    min-width: auto;
+    font-size: var(--font-size-sm);
+    text-align: left;
+    border: none;
+  }
+
+  .navigation__submenu .navigation__item:last-child .navigation__link {
+    border-bottom: none;
+  }
+
+  .navigation__submenu .navigation__link:hover,
+  .navigation__submenu .navigation__link:focus {
+    background-color: var(--light-gray);
+    border: none;
   }
 }
 
