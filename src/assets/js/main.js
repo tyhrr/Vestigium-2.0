@@ -307,22 +307,14 @@ class NavigationManager {
       link.setAttribute('tabindex', '-1');
     });
   }
-
   /**
    * Animar icono hamburguesa
    * @param {boolean} isOpen - Estado del menú
    */
   animateHamburger(isOpen) {
-    const hamburger = Utils.$('.navigation__hamburger', this.toggle);
-    if (!hamburger) return;
-
-    if (isOpen) {
-      hamburger.style.transform = 'rotate(45deg)';
-      hamburger.style.backgroundColor = 'transparent';
-    } else {
-      hamburger.style.transform = 'rotate(0deg)';
-      hamburger.style.backgroundColor = 'var(--text-primary)';
-    }
+    // La animación se maneja automáticamente por CSS
+    // basándose en el estado aria-expanded del toggle
+    console.log(`Hamburger ${isOpen ? 'abierto' : 'cerrado'}`);
   }
 
   /**
@@ -1175,9 +1167,19 @@ function initVestigium() {
       window.vestigiumLanguageSwitcher = languageSwitcher;
     }
     
-    // Inicializar módulos principales
+    // Inicializar gestión de navegación principal (hamburguesa)
+    if (typeof NavigationManager !== 'undefined') {
+      window.vestigiumNavigation = new NavigationManager();
+    }
+    
+    // Inicializar navegación avanzada (submenús)
     if (typeof AdvancedNavigation !== 'undefined') {
       AdvancedNavigation.init();
+    }
+    
+    // Inicializar scroll suave
+    if (typeof SmoothScrollManager !== 'undefined') {
+      window.vestigiumScrollManager = new SmoothScrollManager();
     }
     
     console.log('✅ Vestigium 2.0 inicializado correctamente');
