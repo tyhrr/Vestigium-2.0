@@ -227,8 +227,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background: none;
   border: none;
   cursor: pointer;
@@ -237,11 +237,14 @@
   transition: all var(--transition-fast);
   position: relative;
   z-index: 1001;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .navigation__toggle:hover,
 .navigation__toggle:focus {
   background-color: var(--light-gray);
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .navigation__toggle:focus-visible {
@@ -249,12 +252,17 @@
   outline-offset: 2px;
 }
 
+.navigation__toggle:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
 .navigation__hamburger {
   position: relative;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background-color: var(--text-primary);
-  border-radius: 2px;
+  border-radius: 1px;
   transition: all var(--transition-normal);
 }
 
@@ -262,33 +270,34 @@
 .navigation__hamburger::after {
   content: '';
   position: absolute;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background-color: var(--text-primary);
-  border-radius: 2px;
+  border-radius: 1px;
   transition: all var(--transition-normal);
   left: 0;
 }
 
 .navigation__hamburger::before {
-  transform: translateY(-8px);
+  transform: translateY(-2px);
 }
 
 .navigation__hamburger::after {
-  transform: translateY(8px);
+  transform: translateY(2px);
 }
 
 /* Estado activo del hamburger (X) */
 .navigation__toggle[aria-expanded="true"] .navigation__hamburger {
   background-color: transparent;
+  transform: rotate(180deg);
 }
 
 .navigation__toggle[aria-expanded="true"] .navigation__hamburger::before {
-  transform: rotate(45deg) translateY(0);
+  transform: rotate(45deg) translateY(0) translateX(0);
 }
 
 .navigation__toggle[aria-expanded="true"] .navigation__hamburger::after {
-  transform: rotate(-45deg) translateY(0);
+  transform: rotate(-45deg) translateY(0) translateX(0);
 }
 
 .navigation__menu {

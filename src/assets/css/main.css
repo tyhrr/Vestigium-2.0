@@ -454,7 +454,8 @@ p {
    ============================================================================= */
 
 .hero {
-  background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+  /*background: url('/src/assets/images/index/banner-hero.jpg');*/
+  background: #E0E0E0;
   padding: var(--space-4xl) 0;
   text-align: center;
 }
@@ -877,7 +878,7 @@ p {
   padding: var(--space-sm) var(--space-md);
   background-color: rgba(46, 125, 50, 0.05);
   border-radius: var(--radius-sm);
-  border-left: 3px solid var(--primary-green);
+  background-color: #757575;
 }
 
 .visitor-counter__icon {

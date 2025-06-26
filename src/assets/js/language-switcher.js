@@ -140,12 +140,11 @@ const TRANSLATIONS = {
         item4: 'Organizational support'
       },      contact: {
         title: 'Contact'
-      },
-      location: {
+      },      location: {
         label: 'Location:',
-        area: 'Vrbana Area, Zagreb',
+        address: 'Grančarska 2a, Brezovica',
         country: 'Croatia'
-      },      movement: 'Global Transition Movement',
+      },movement: 'Global Transition Movement',
       copyright: '&copy; 2025 Vestigium Association. All rights reserved.',
       tech: 'Building sustainable communities since 2011 • Over 1000 annual activities',
       visitors: {
@@ -286,12 +285,11 @@ const TRANSLATIONS = {
         item4: 'Organizacijska podrška'
       },      contact: {
         title: 'Kontakt'
-      },
-      location: {
+      },      location: {
         label: 'Lokacija:',
-        area: 'Područje Vrbane, Zagreb',
+        address: 'Grančarska 2a, Brezovica',
         country: 'Hrvatska'
-      },      movement: 'Globalni Tranzicijski Pokret',
+      },movement: 'Globalni Tranzicijski Pokret',
       copyright: '&copy; 2025 Udruga Vestigium. Sva prava pridržana.',
       tech: 'Izgradnja održivih zajednica od 2011. • Preko 1000 godišnjih aktivnosti',
       visitors: {
