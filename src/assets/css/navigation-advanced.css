@@ -176,12 +176,14 @@
 /* Responsive para móvil */
 @media (max-width: 768px) {
   .language-selector {
-    margin-right: var(--space-sm);
+    margin: 0;
   }
   
   .language-selector__toggle {
-    padding: var(--space-xs) var(--space-sm);
-    min-height: 36px;
+    padding: var(--space-sm);
+    min-height: 40px;
+    width: 40px;
+    justify-content: center;
   }
   
   .language-selector__current {
@@ -230,7 +232,7 @@
   width: 40px;
   height: 40px;
   background: none;
-  border: none;
+  border: 1px solid var(--border-color);
   cursor: pointer;
   padding: var(--space-sm);
   border-radius: var(--radius-sm);
@@ -243,8 +245,9 @@
 .navigation__toggle:hover,
 .navigation__toggle:focus {
   background-color: var(--light-gray);
+  border-color: var(--primary-green);
   transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.15);
 }
 
 .navigation__toggle:focus-visible {
@@ -259,45 +262,46 @@
 
 .navigation__hamburger {
   position: relative;
-  width: 22px;
+  width: 18px;
   height: 2px;
   background-color: var(--text-primary);
   border-radius: 1px;
-  transition: all var(--transition-normal);
+  transition: all 0.3s ease-in-out;
 }
 
 .navigation__hamburger::before,
 .navigation__hamburger::after {
   content: '';
   position: absolute;
-  width: 22px;
+  width: 18px;
   height: 2px;
   background-color: var(--text-primary);
   border-radius: 1px;
-  transition: all var(--transition-normal);
+  transition: all 0.3s ease-in-out;
   left: 0;
 }
 
 .navigation__hamburger::before {
-  transform: translateY(-2px);
+  top: -6px;
 }
 
 .navigation__hamburger::after {
-  transform: translateY(2px);
+  top: 6px;
 }
 
-/* Estado activo del hamburger (X) */
+/* Estado activo del hamburger (X exacta como en la imagen) */
 .navigation__toggle[aria-expanded="true"] .navigation__hamburger {
-  background-color: transparent;
-  transform: rotate(180deg);
+  background-color: transparent !important;
 }
 
 .navigation__toggle[aria-expanded="true"] .navigation__hamburger::before {
-  transform: rotate(45deg) translateY(0) translateX(0);
+  top: 0 !important;
+  transform: rotate(45deg) !important;
 }
 
 .navigation__toggle[aria-expanded="true"] .navigation__hamburger::after {
-  transform: rotate(-45deg) translateY(0) translateX(0);
+  top: 0 !important;
+  transform: rotate(-45deg) !important;
 }
 
 .navigation__menu {
@@ -411,18 +415,30 @@
 
 /* Móvil y tablets en modo retrato */
 @media (max-width: 767px) {
-  .language-selector {
-    order: -1;
-    margin-right: 0;
-    margin-left: auto;
-  }
-
   .header__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
     padding: var(--space-sm) var(--space-md);
+  }
+
+  .header__brand {
+    flex: 0 0 auto; /* No grow, no shrink */
+    margin-right: auto; /* Empuja los botones hacia la derecha */
+  }
+
+  /* Contenedor para botones de la derecha */
+  .header__top-row {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Juntos a 5px entre botones */
+    flex: 0 0 auto; /* No grow, no shrink */
+  }
+
+  .language-selector {
+    order: 1;
+    margin: 0;
   }
 
   .navigation__toggle {
@@ -484,9 +500,15 @@
     padding: var(--space-sm) var(--space-lg);
   }
 
+  .header__brand {
+    flex: 0 0 auto;
+    margin-right: auto;
+  }
+
   .navigation__toggle {
     display: flex;
     order: 2;
+    margin-left: 5px; /* Separación del selector de idioma */
   }
 
   .navigation__menu {
@@ -553,7 +575,7 @@
   }
 
   .header__brand {
-    flex-shrink: 0;
+    flex: 0 0 auto;
   }
 
   .language-selector {
@@ -790,7 +812,7 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .language-selector {
     order: 1;
-    margin-right: var(--space-md);
+    margin-right: 5px; /* Separación de 5px del hamburguesa */
   }
 }
 
@@ -829,8 +851,14 @@
   }
   
   .language-selector__toggle {
-    min-height: 32px;
-    padding: var(--space-xs);
+    min-height: 40px;
+    width: 40px;
+    padding: var(--space-sm);
+  }
+
+  .navigation__toggle {
+    width: 40px;
+    height: 40px;
   }
 }
 
