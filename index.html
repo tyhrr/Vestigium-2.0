@@ -231,24 +231,53 @@
         <section id="nosotros" class="about" aria-labelledby="about-heading">
             <div class="about__container">
                 <div class="about__content" itemscope itemtype="https://schema.org/Organization">
-                    <h2 id="about-heading" class="about__title" data-i18n="about.title">
-                        About Vestigium
-                    </h2>                    <p class="about__text" data-i18n="about.text1" data-i18n-html>
-                        <strong>Vestigium (lat. footprint)</strong> was born in 2011 by the initiative of six women 
-                        who listened to the needs of their neighbors in the Vrbana area, Zagreb. We created a 
-                        multifunctional space where initiatives can develop and flourish.
-                    </p>
-                    <p class="about__text" data-i18n="about.text2" data-i18n-html>
-                        As part of the <strong>Global Transition Movement for Sustainable Communities</strong>, 
-                        we work to solve problems such as the growing distance between people, the lack 
-                        of meeting and socializing places, and the exclusion of families and elderly residents.
-                    </p>
-                    <p class="about__text" data-i18n="about.text3" data-i18n-html>
-                        Since 2017 we are beneficiaries of institutional support from the National Foundation for 
-                        Civil Society Development. In 2017 we were presented as an inspiring example 
-                        "Changemakers" from Croatia, and in 2018 nominated among the top 30 projects for the 
-                        "Social Marie Award" among 250 European socially innovative projects.
-                    </p>
+                    <div class="about__text-content">
+                        <h2 id="about-heading" class="about__title" data-i18n="about.title">
+                            About Vestigium
+                        </h2>                        
+                        <p class="about__text" data-i18n="about.text1" data-i18n-html>
+                            <strong>Vestigium (lat. footprint)</strong> was born in 2011 by the initiative of six women 
+                            who listened to the needs of their neighbors in the Vrbana area, Zagreb. We created a 
+                            multifunctional space where initiatives can develop and flourish.
+                        </p>
+                        <p class="about__text" data-i18n="about.text2" data-i18n-html>
+                            As part of the <strong>Global Transition Movement for Sustainable Communities</strong>, 
+                            we work to solve problems such as the growing distance between people, the lack 
+                            of meeting and socializing places, and the exclusion of families and elderly residents.
+                        </p>
+                        <p class="about__text" data-i18n="about.text3" data-i18n-html>
+                            Since 2017 we are beneficiaries of institutional support from the National Foundation for 
+                            Civil Society Development. In 2017 we were presented as an inspiring example 
+                            "Changemakers" from Croatia, and in 2018 nominated among the top 30 projects for the 
+                            "Social Marie Award" among 250 European socially innovative projects.
+                        </p>
+                    </div>
+                    
+                    <div class="about__carousel">
+                        <div class="carousel__container">
+                            <button class="carousel__btn carousel__btn--prev" aria-label="Previous image">
+                                <svg class="carousel__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="15,18 9,12 15,6"></polyline>
+                                </svg>
+                            </button>
+                            
+                            <div class="carousel__wrapper">
+                                <div class="carousel__track" id="carousel-track">
+                                    <!-- Images will be loaded dynamically by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <button class="carousel__btn carousel__btn--next" aria-label="Next image">
+                                <svg class="carousel__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="9,18 15,12 9,6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="carousel__dots" id="carousel-dots">
+                            <!-- Dots will be generated by JavaScript -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>        <!-- Aside complementario -->
@@ -370,6 +399,7 @@
     </svg>    <!-- Scripts al final del body -->
     <script src="src/assets/js/language-switcher.js"></script>
     <script src="src/assets/js/visitor-counter.js"></script>
+    <script src="src/assets/js/about-carousel.js"></script>
     <script src="src/assets/js/main.js"></script>
     
     <!-- Script de monitoreo del Language Switcher (solo para desarrollo) -->

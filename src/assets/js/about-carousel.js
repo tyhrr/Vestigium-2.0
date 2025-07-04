@@ -145,6 +145,75 @@ class VestigiumCarousel {
                 if (e.key === 'ArrowRight') this.nextSlide();
             }
         });
+        
+        // Touch/Swipe navigation for mobile devices
+        this.bindTouchEvents();
+    }
+    
+    /**
+     * Bind touch events for swipe navigation
+     */
+    bindTouchEvents() {
+        const carousel = document.querySelector('.about__carousel');
+        if (!carousel) return;
+        
+        let startX = 0;
+        let startY = 0;
+        let endX = 0;
+        let endY = 0;
+        let isSwiping = false;
+        
+        // Touch start
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isSwiping = true;
+            this.pauseAutoSlide();
+        }, { passive: true });
+        
+        // Touch move
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            
+            endX = e.touches[0].clientX;
+            endY = e.touches[0].clientY;
+            
+            // Prevent default scrolling if horizontal swipe is detected
+            const deltaX = Math.abs(endX - startX);
+            const deltaY = Math.abs(endY - startY);
+            
+            if (deltaX > deltaY && deltaX > 10) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        // Touch end
+        carousel.addEventListener('touchend', (e) => {
+            if (!isSwiping) return;
+            isSwiping = false;
+            
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
+            
+            // Minimum swipe distance (50px) and ensure it's more horizontal than vertical
+            if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX > 0) {
+                    // Swipe right - go to previous slide
+                    this.prevSlide();
+                } else {
+                    // Swipe left - go to next slide
+                    this.nextSlide();
+                }
+            }
+            
+            this.startAutoSlide();
+        }, { passive: true });
+        
+        // Touch cancel
+        carousel.addEventListener('touchcancel', () => {
+            isSwiping = false;
+            this.startAutoSlide();
+        }, { passive: true });
     }
     
     /**

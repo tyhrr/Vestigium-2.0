@@ -691,13 +691,14 @@ p {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-fast);
   z-index: 2;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Hide buttons on mobile devices */
+  display: none;
 }
 
 .carousel__btn:hover {
@@ -770,6 +771,11 @@ p {
   .carousel__wrapper {
     width: 300px;
     height: 300px;
+  }
+  
+  /* Show navigation buttons on tablets and up */
+  .carousel__btn {
+    display: flex;
   }
   
   .carousel__btn--prev {
