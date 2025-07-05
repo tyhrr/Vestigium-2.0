@@ -455,7 +455,6 @@ p {
    ============================================================================= */
 
 .hero {
-  /*background: url('/src/assets/images/index/banner-hero.jpg');*/
   background-image: url(/src/assets/images/index/banner-hero.jpg);
   padding: var(--space-4xl) 0;
   text-align: center;
