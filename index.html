@@ -396,7 +396,74 @@
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
             </symbol>
         </defs>
-    </svg>    <!-- Scripts al final del body -->
+    </svg>    <!-- ==========================================
+         DESARROLLO - SCRIPT ANTI-CACHÉ
+         ¡ELIMINAR ANTES DE PRODUCCIÓN!
+         ========================================== -->
+    <script>
+        /* 
+         * SCRIPT DE DESARROLLO - NO CACHE
+         * Este script previene que el navegador guarde en caché la página
+         * durante el desarrollo para facilitar la visualización de cambios.
+         * 
+         * ⚠️ IMPORTANTE: Eliminar este script antes del deployment final
+         */
+        (function() {
+            console.log('🚧 MODO DESARROLLO: Cache deshabilitado');
+            
+            // Deshabilitar caché para la página actual
+            if ('serviceWorker' in navigator) {
+                // Eliminar cualquier service worker existente
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for(let registration of registrations) {
+                        registration.unregister();
+                    }
+                });
+            }
+            
+            // Agregar headers meta para deshabilitar caché
+            const metaNoCache = document.createElement('meta');
+            metaNoCache.httpEquiv = 'Cache-Control';
+            metaNoCache.content = 'no-cache, no-store, must-revalidate';
+            document.head.appendChild(metaNoCache);
+            
+            const metaPragma = document.createElement('meta');
+            metaPragma.httpEquiv = 'Pragma';
+            metaPragma.content = 'no-cache';
+            document.head.appendChild(metaPragma);
+            
+            const metaExpires = document.createElement('meta');
+            metaExpires.httpEquiv = 'Expires';
+            metaExpires.content = '0';
+            document.head.appendChild(metaExpires);
+            
+            // Agregar timestamp a todos los recursos para forzar recarga
+            const resources = document.querySelectorAll('link[rel="stylesheet"], script[src]');
+            resources.forEach(resource => {
+                if (resource.href || resource.src) {
+                    const url = resource.href || resource.src;
+                    const separator = url.includes('?') ? '&' : '?';
+                    const timestamp = `${separator}v=${Date.now()}`;
+                    
+                    if (resource.href) {
+                        resource.href = url + timestamp;
+                    } else {
+                        resource.src = url + timestamp;
+                    }
+                }
+            });
+            
+            // Mostrar aviso en consola
+            console.log('%c🚧 DESARROLLO ACTIVO', 'background: #ff6b35; color: white; padding: 2px 5px; border-radius: 3px;');
+            console.log('Cache deshabilitado para facilitar desarrollo');
+            console.log('Recuerda eliminar el script anti-caché antes de producción');
+        })();
+    </script>
+    <!-- ========================================== 
+         FIN SCRIPT ANTI-CACHÉ DE DESARROLLO
+         ========================================== -->
+
+    <!-- Scripts al final del body -->
     <script src="./src/assets/js/language-switcher.js"></script>
     <script src="./src/assets/js/visitor-counter.js"></script>
     <script src="./src/assets/js/about-carousel.js"></script>

@@ -33,10 +33,10 @@
       "name": "Activities",
       "short_name": "Activities",
       "description": "View our community activities",
-      "url": "/#activities",
+      "url": "./#activities",
       "icons": [
         {
-          "src": "/src/assets/images/favicon/favicon-96x96.png",
+          "src": "./src/assets/images/favicon/favicon-96x96.png",
           "sizes": "96x96"
         }
       ]
@@ -45,10 +45,10 @@
       "name": "Get Involved",
       "short_name": "Get Involved",
       "description": "Join as volunteer or member",
-      "url": "/#get-involved",
+      "url": "./#get-involved",
       "icons": [
         {
-          "src": "/src/assets/images/favicon/favicon-96x96.png",
+          "src": "./src/assets/images/favicon/favicon-96x96.png",
           "sizes": "96x96"
         }
       ]
